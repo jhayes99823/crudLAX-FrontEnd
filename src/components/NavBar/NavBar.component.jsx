@@ -20,8 +20,6 @@ export default class NavBar extends React.Component {
                     <Button variant="outline-info">Search</Button>
                     </Form>
                 </Navbar>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu dapibus nisl. Aliquam feugiat, metus vel consectetur tincidunt, elit libero efficitur lacus, a tincidunt odio augue sit amet nisl. Suspendisse at velit vitae neque suscipit finibus vel et purus. Mauris pulvinar libero in est porta, ornare interdum ante interdum. Nunc ultrices gravida justo a feugiat. Vivamus ut tellus quis nisi lacinia viverra. Sed eget interdum lectus, vel viverra orci. Maecenas feugiat laoreet massa. Sed eget laoreet neque. Nam id tellus aliquam, euismod magna eget, feugiat lorem. Donec volutpat quis odio eget egestas.</p>
-                <button className="button-style">Click Me</button>
             </div>
         )
     }
