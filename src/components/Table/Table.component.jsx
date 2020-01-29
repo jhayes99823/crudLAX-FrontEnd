@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Table } from 'react-bootstrap';
 
-export default class Table extends React.Component {
+export default class InformationTable extends React.Component {
     render() {
         return (
             <div>
