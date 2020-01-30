@@ -1,0 +1,17 @@
+.label{
+    font-size: 40 px;
+    color: black; 
+    background-color: grey;
+    text-align: left;
+    padding-left: 20 px;
+}
+
+.btn-group{
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; 
+    width: 50%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+}
