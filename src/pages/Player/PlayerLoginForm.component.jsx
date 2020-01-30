@@ -10,6 +10,9 @@ export default class PlayerLoginForm extends React.Component {
             />
             <p>Enter your new password:</p>
             <input type="password"></input>
+            <button>
+              Reset Your Passowrd 
+            </button>
           </form>
         )
     }
