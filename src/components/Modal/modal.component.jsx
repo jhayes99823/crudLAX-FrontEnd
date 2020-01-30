@@ -19,10 +19,10 @@ export default class UserTypeModal extends React.Component {
                         <Container>
                             <Row>
                                 <Col>
-                                    <Button href="/coach-sign-up" size="lg">Coach</Button>
+                                    <Button href="/signup/coach" size="lg">Coach</Button>
                                 </Col>
                                 <Col>
-                                    <Button href="/player-sign-up" size="lg">Player</Button>
+                                    <Button href="/signup/player" size="lg">Player</Button>
                                 </Col>
                             </Row>
                         </Container>

@@ -11,6 +11,15 @@ import PlayerSignUpPage from './pages/Player/SignUp/PlayerSignUp.page';
 import CoachSignUpPage from './pages/Coach/CoachSignUp.page';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      loggedIn: false
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -21,8 +30,8 @@ class App extends Component {
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={Signup} />
             <Route path="/player-home" component={PlayerHomePage} />
-            <Route path="/player-sign-up" component={PlayerSignUpPage} />
-            <Route path="/coach-sign-up" component={CoachSignUpPage} />
+            <Route path="/signup/player" component={PlayerSignUpPage} />
+            <Route path="/signup/coach" component={CoachSignUpPage} />
           </Switch>
         </Router>
       </div>
