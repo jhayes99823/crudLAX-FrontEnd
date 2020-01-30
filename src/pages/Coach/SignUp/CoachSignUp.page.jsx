@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Form, Button, Col, Container } from 'react-bootstrap';
 
 import styles from './styles.css';
+import { setUser } from '../../../contexts';
 
 export default class CoachSignUpPage extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class CoachSignUpPage extends React.Component {
             lname: '',
             username: '',
             password: '',
-            isCoach: true
+            role: 'Coach'
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -32,11 +33,12 @@ export default class CoachSignUpPage extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({user: this.state})
         }).then((Response) => Response.json())
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
+                    // setUser(result.user);
                     this.props.history.push('/coach-home');
                 }
                 else {
