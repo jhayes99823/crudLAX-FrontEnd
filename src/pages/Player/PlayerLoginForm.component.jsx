@@ -3,7 +3,7 @@ export default class PlayerLoginForm extends React.Component {
     render() {
         return (
             <form>
-              <h1> the new bob</h1>
+              <h1> the new bob bob</h1>
             <p>Enter your new user name:</p>
             <input
               type="text"
