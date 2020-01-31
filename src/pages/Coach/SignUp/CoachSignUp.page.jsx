@@ -1,10 +1,9 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 import { Form, Button, Col, Container } from 'react-bootstrap';
 
 import styles from './styles.css';
-import { setUser } from '../../../contexts';
+import LabelPage from '../../../components/Label/label.component';
 
 export default class CoachSignUpPage extends React.Component {
     constructor(props) {
@@ -28,7 +27,7 @@ export default class CoachSignUpPage extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        fetch('/api/users/sign-up', {
+        fetch('/api/users/signup/coach', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +37,7 @@ export default class CoachSignUpPage extends React.Component {
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
-                    // setUser(result.user);
+                    
                     this.props.history.push('/coach-home');
                 }
                 else {
@@ -50,9 +49,7 @@ export default class CoachSignUpPage extends React.Component {
     render() {
         return(
             <div>
-                <div className="label-border">
-                    <h2>Sign Up As New Coach</h2>
-                </div>
+                <LabelPage text="Sign Up As A New Coach" bcolor="black"/>
             <div>
                 <Container className="form-border centered">
                     <Form onSubmit={this.onSubmit}>
@@ -86,7 +83,7 @@ export default class CoachSignUpPage extends React.Component {
                     </Form>
                 </Container>
             </div>
-            </div>
+        </div>
         )
     }
 }
