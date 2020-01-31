@@ -15,6 +15,7 @@ export default class PlayerHomePage extends React.Component {
         const response = await fetch('/api/users');
         const body = await response.json();
         console.log(body);
+        return body.result[2];
     }
     
     render() {

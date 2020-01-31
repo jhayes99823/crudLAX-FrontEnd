@@ -17,7 +17,7 @@ export default class Login extends React.Component{
 
         this.password = this.password.bind(this);
         this.username = this.username.bind(this);
-        this.login = this.login.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
@@ -30,23 +30,25 @@ export default class Login extends React.Component{
         this.setState({ password: event.target.value })
     }
 
-    login(event) {
-        fetch('/api/users/sign-up', {
-            method: 'post',
+    onSubmit(event) {
+        event.preventDefault();
+        fetch('/api/users/login', {
+            method: 'POST',
             headers: {
-                'Accept': 'application/json',  
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password,
-                isCoach: this.state.isCoach
+            body: JSON.stringify({user: this.state})
+        }).then((Response) => Response.json())
+            .then((result) => {
+                console.log(result);
+                if (result.success == true) {
+                    localStorage.setItem('loggedIn', result.user);
+                    this.props.history.push('/player-home');
+                }
+                else {
+                    alert('something went wrong')
+                }
             })
-            .then((res) => res.json())
-            .then((results) => {
-                console.log(results);
-            })
-        })
     }
 
     handleShowModal() {
@@ -60,7 +62,7 @@ export default class Login extends React.Component{
     render() {
         return (
             <div>
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={this.login}>
                     <Form.Group controlId="formUsername">
                         <Form.Label>Username</Form.Label>
                         <Form.Control name="username" type="text" placeholder="Enter Username" />
@@ -68,7 +70,7 @@ export default class Login extends React.Component{
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Password" />
+                        <Form.Control name="password" type="password" placeholder="Enter Password" />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

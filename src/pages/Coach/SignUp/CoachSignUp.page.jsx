@@ -28,7 +28,7 @@ export default class CoachSignUpPage extends React.Component {
     onSubmit(event) {
         event.preventDefault();
         fetch('/api/users/signup/coach', {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -38,7 +38,7 @@ export default class CoachSignUpPage extends React.Component {
                 console.log(result);
                 if (result.success == true) {
                     
-                    this.props.history.push('/coach-home');
+                    this.props.history.push('/login');
                 }
                 else {
                     alert('something went wrong')
@@ -49,7 +49,8 @@ export default class CoachSignUpPage extends React.Component {
     render() {
         return(
             <div>
-                <LabelPage text="Sign Up As A New Coach" bcolor="black"/>
+                <LabelPage padding="10px" text="Sign Up As Coach" bcolor="grey" topperc="25%" leftperc="50%"/>
+            
             <div>
                 <Container className="form-border centered">
                     <Form onSubmit={this.onSubmit}>

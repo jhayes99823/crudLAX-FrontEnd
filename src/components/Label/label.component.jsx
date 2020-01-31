@@ -9,7 +9,7 @@ export default class LabelPage extends React.Component {
 
     render() {
         const styles = {
-            'background-color': this.props.bcolor,
+            'backgroundColor': this.props.bcolor,
             'left': this.props.leftperc,
             'top': this.props.topperc,
             'padding': this.props.padding

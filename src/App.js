@@ -10,7 +10,6 @@ import PlayerHomePage from './pages/Player/Home/HomePage.page';
 import PlayerSignUpPage from './pages/Player/SignUp/PlayerSignUp.page';
 import CoachSignUpPage from './pages/Coach/SignUp/CoachSignUp.page';
 import CoachHomePage from './pages/Coach/Home/HomePage.page';
-import { AuthProvider } from './contexts';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +20,6 @@ class App extends Component {
     return (
       <div className="App">
           <NavBar />
-          <AuthProvider>
             <Switch>
                 <Route exact path="/" component={Login} />
                 <Route path="/sign-in" component={Login} />
@@ -31,7 +29,6 @@ class App extends Component {
                 <Route path="/coach-home" component={CoachHomePage} />
                 <Route path="/signup/coach" component={CoachSignUpPage} />
               </Switch>
-          </AuthProvider>
       </div>
     );
   }
