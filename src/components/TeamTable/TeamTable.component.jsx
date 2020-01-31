@@ -1,8 +1,9 @@
 import React from 'react';
 import { Table, Alert } from 'react-bootstrap';
 
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaPen } from 'react-icons/fa';
 import DeleteTeamModal from '../Team/DeleteTeamModal.componenet';
+import UpdateTeamModal from '../Team/UpdateTeamModal.component';
 
 export default class TeamTable extends React.Component {
     constructor(props) {
@@ -16,7 +17,18 @@ export default class TeamTable extends React.Component {
 
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
+        this.updateCell = this.updateCell.bind(this);
+        this.handleShowModal = this.handleShowModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
+
+    handleShowModal() {
+	    this.setState({ showModal: true });
+    }
+    
+	handleCloseModal() {
+		this.setState({ showModal: false });
+	}
 
     deleteTeam = TID => () => {
         const url = '/api/teams';
@@ -44,12 +56,15 @@ export default class TeamTable extends React.Component {
                 console.log(err)
             })
         }
-    
+
+    updateCell = TID => () => {
+        console.log('TID of cell to me updated', TID)
+    }
 
     renderTeam(team, index) {
         return (
             <tr key={team.TID}>
-                <th>
+                <th onDoubleClick={this.updateCell(team.TID)}>
                     {team.TeamName}
                 </th>
                 <th>
@@ -66,6 +81,9 @@ export default class TeamTable extends React.Component {
                 </th>
                 <th onClick={this.deleteTeam(team.TID)}>
                    <FaTrash />
+                </th>
+                <th>
+                    <FaPen />
                 </th>
             </tr>
         )
