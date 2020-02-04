@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar/NavBar.component';
-import InformationTable from './components/Table/Table.component';
+
+import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+
+import Login from './components/LogIn/login.component';
+import Signup from './components/SignUp/signup.component';
+import PlayerHomePage from './pages/Player/Home/HomePage.page';
+import PlayerSignUpPage from './pages/Player/SignUp/PlayerSignUp.page';
+import CoachSignUpPage from './pages/Coach/SignUp/CoachSignUp.page';
+import CoachHomePage from './pages/Coach/Home/HomePage.page';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div className="App">
-        <NavBar />
-        <InformationTable />
+          <NavBar />
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <Route path="/sign-in" component={Login} />
+                <Route path="/sign-up" component={Signup} />
+                <Route path="/player-home" component={PlayerHomePage} />
+                <Route path="/signup/player" component={PlayerSignUpPage} />
+                <Route path="/coach-home" component={CoachHomePage} />
+                <Route path="/signup/coach" component={CoachSignUpPage} />
+              </Switch>
       </div>
     );
   }
