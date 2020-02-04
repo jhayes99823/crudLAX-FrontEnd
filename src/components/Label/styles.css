@@ -1,0 +1,7 @@
+.label-border {
+    border-radius: 5px;
+    color: white;
+    position: fixed;
+
+    transform: translate(-50%, -50%);
+}
