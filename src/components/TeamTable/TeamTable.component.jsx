@@ -119,7 +119,7 @@ export default class TeamTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {coachesTeams.map(this.renderTeam)}
+                        {coachesTeams == null ? <tr></tr> : coachesTeams.map(this.renderTeam)}
                     </tbody>
                 </Table>
             </div>
