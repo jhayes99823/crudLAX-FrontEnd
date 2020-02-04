@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container } from 'react-bootstrap';
 import UserTypeModal from '../Modal/modal.component';
 
 import styles from './styles.css';
@@ -62,23 +62,25 @@ export default class Login extends React.Component{
     render() {
         return (
             <div>
-                <Form onSubmit={this.login}>
-                    <Form.Group controlId="formUsername">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control name="username" type="text" placeholder="Enter Username" />
-                    </Form.Group>
+                <Container>
+                    <Form onSubmit={this.onSubmit}>
+                        <Form.Group controlId="formUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control name="username" type="text" placeholder="Enter Username" />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Enter Password" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-                <div className="divider one-line line"><span>or</span></div>
-                <Button onClick={this.handleShowModal}>Sign Up</Button>
-                <UserTypeModal show={this.state.showModal} onHide={this.handleCloseModal} />
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control name="password" type="password" placeholder="Enter Password" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                    <div className="divider one-line line"><span>or</span></div>
+                    <Button onClick={this.handleShowModal}>Sign Up</Button>
+                    <UserTypeModal show={this.state.showModal} onHide={this.handleCloseModal} />
+                </Container>
             </div>
         )
     }

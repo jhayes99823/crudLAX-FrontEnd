@@ -38,7 +38,7 @@ export default class CoachSignUpPage extends React.Component {
                 console.log(result);
                 if (result.success == true) {
                     
-                    this.props.history.push('/login');
+                    this.props.history.push('/coach-home');
                 }
                 else {
                     alert('something went wrong')
