@@ -14,7 +14,7 @@ export default class CoachSignUpPage extends React.Component {
             lname: '',
             username: '',
             password: '',
-            role: 'Coach'
+            role: 'C'
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -37,8 +37,7 @@ export default class CoachSignUpPage extends React.Component {
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
-                    
-                    this.props.history.push('/coach-home');
+                    this.props.history.push('/')
                 }
                 else {
                     alert('something went wrong')

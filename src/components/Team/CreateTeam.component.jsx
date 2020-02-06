@@ -11,7 +11,6 @@ export default class CreateTeamModal extends React.Component {
         this.state = {
             teamname: '',
             isActive: '',
-            coachid: 3,
             hometown: '',
             schoolname: '',
             state: ''
@@ -30,7 +29,7 @@ export default class CreateTeamModal extends React.Component {
         const newTeam = {
             teamname: this.state.teamname,
             isActive: true,
-            coachid: this.state.coachid,
+            coachid: this.props.coachid,
             hometown: this.state.hometown,
             schoolname: this.state.schoolname,
             state: this.state.state
@@ -45,7 +44,7 @@ export default class CreateTeamModal extends React.Component {
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
-                   this.props.history.push('/coach-home')
+                   window.location.reload();
                 }
                 else {
                     alert('something went wrong')

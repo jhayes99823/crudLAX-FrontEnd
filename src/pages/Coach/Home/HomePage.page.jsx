@@ -1,6 +1,5 @@
 import React from 'react';
 import LabelPage from '../../../components/Label/label.component';
-import InformationTable from '../../../components/Table/Table.component';
 import { Container, Button } from 'react-bootstrap';
 import TeamTable from '../../../components/TeamTable/TeamTable.component';
 import CreateTeamModal from '../../../components/Team/CreateTeam.component';
@@ -10,9 +9,9 @@ export default class CoachHomePage extends React.Component {
         super(props);
         
         this.state = {
-            coachid: 3,
             teams: [],
             showModal: false,
+            userid: null,
         }
 
         this.handleShowModal = this.handleShowModal.bind(this);
@@ -20,26 +19,44 @@ export default class CoachHomePage extends React.Component {
     }
 
     componentDidMount() {
-        fetch('api/teams?username=rrogers', {
-            method: 'GET',
+        const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
+        
+        console.log('loggedin', loggedUser);
+        console.log('state', this.state);
+        const url = 'api/teams';
+        var params = {
+            username: loggedUser.Username
+        };
+
+        var esc = encodeURIComponent;
+        var query = Object.keys(params)
+            .map(k => esc(k) + '=' + esc(params[k]))
+            .join('&');
+
+        console.log('query', query);
+
+        var request = new Request(url + "?" + query, {
+            method: 'GET'
+        })
+
+        fetch(request, {
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then((res) => res.json())
         .then((result) => {
-            localStorage.setItem('teams', JSON.stringify(result.teams));
+            console.log('result', result);
+            // localStorage.setItem('teams', JSON.stringify(result.teams));
+            this.setState({
+                teams: result.teams,
+                userid: result.user[0].ID
+            });
+            console.log('state', this.state);
         },
         (err) => {
             console.log(err)
         })
       }
-
-    callApi = async () => {
-        const response = await fetch('/api/users');
-        const body = await response.json();
-        console.log(body.result[2])
-        console.log(body);
-    }
 
     
     handleShowModal() {
@@ -50,34 +67,14 @@ export default class CoachHomePage extends React.Component {
 		this.setState({ showModal: false });
 	}
 
-
-    getTeams = async () => {        
-        var query = [
-            `coachid=3`
-        ].join('&');
-
-            fetch('api/teams?username=rrogers', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then((res) => res.json())
-            .then((result) => {
-                console.log(result.teams[0])
-            },
-            (err) => {
-                console.log(err)
-            })
-    }
-
     render() {
         return( 
             <div>
                 <Container>
                     <LabelPage padding="10px" text="Your Teams" bcolor="grey" topperc="12%" leftperc="10%"/>
-                    <TeamTable topperc="12%" leftperc="20%" />
+                    <TeamTable teams={this.state.teams} topperc="12%" leftperc="20%" />
                     <Button onClick={this.handleShowModal}>Create Team</Button>
-                    <CreateTeamModal show={this.state.showModal} onHide={this.handleCloseModal} />
+                    <CreateTeamModal coachid={this.state.userid} show={this.state.showModal} onHide={this.handleCloseModal} />
                 </Container>
             </div>
         )
