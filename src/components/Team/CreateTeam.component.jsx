@@ -55,7 +55,7 @@ export default class CreateTeamModal extends React.Component {
     render() {
         return (
             <div>
-                <Modal {...this.props} centered>
+                <Modal show={this.props.show} onHide={this.props.onHide} centered>
                     <Modal.Header centered>
                         Create New Team
                     </Modal.Header>
@@ -86,10 +86,7 @@ export default class CreateTeamModal extends React.Component {
                                     {USState.map((state) => <option>{state}</option>)}
                                 </Form.Control>
                             </Form.Group>
-
-       
                         </Form.Row>
-
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>

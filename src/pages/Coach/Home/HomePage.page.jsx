@@ -22,7 +22,6 @@ export default class CoachHomePage extends React.Component {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
         
         console.log('loggedin', loggedUser);
-        console.log('state', this.state);
         const url = 'api/teams';
         var params = {
             username: loggedUser.Username
@@ -45,13 +44,10 @@ export default class CoachHomePage extends React.Component {
             },
         }).then((res) => res.json())
         .then((result) => {
-            console.log('result', result);
-            // localStorage.setItem('teams', JSON.stringify(result.teams));
             this.setState({
                 teams: result.teams,
                 userid: result.user[0].ID
             });
-            console.log('state', this.state);
         },
         (err) => {
             console.log(err)

@@ -3,7 +3,7 @@ import { Button, Form, Container } from 'react-bootstrap';
 import UserTypeModal from '../Modal/modal.component';
 
 import styles from './styles.css';
-import AlertUser from '../Alert/alert.component';
+import { Alert } from 'react-bootstrap';
 
 export default class Login extends React.Component{
     constructor(props) {
@@ -23,6 +23,16 @@ export default class Login extends React.Component{
         this.onSubmit = this.onSubmit.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.showAlert = this.showAlert.bind(this);
+        this.closeAlert = this.closeAlert.bind(this);
+    }
+
+    showAlert() {
+        this.setState({ showAlert: true });
+    }
+
+    closeAlert() {
+        this.setState({ showAlert: false });
     }
 
     setValue(event) {
@@ -63,8 +73,8 @@ export default class Login extends React.Component{
                     }
                 }
                 else {
-                    alert('something went wrong')
-                    localStorage.clear()
+                    console.log('triny to show alert');
+                    this.showAlert();
                 }
             })
     }
@@ -80,6 +90,7 @@ export default class Login extends React.Component{
     render() {
         return (
             <div>
+                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>Incorrect Password. Please Try Again.</Alert>
                 <Container>
                     <Form onSubmit={this.onSubmit}>
                         <Form.Group controlId="formUsername">

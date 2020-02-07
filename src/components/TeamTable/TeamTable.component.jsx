@@ -2,18 +2,20 @@ import React from 'react';
 import { Table, Alert } from 'react-bootstrap';
 
 import { FaTrash, FaPen } from 'react-icons/fa';
-import DeleteTeamModal from '../Team/DeleteTeamModal.componenet';
 import UpdateTeamModal from '../Team/UpdateTeamModal.component';
+import logic from '../../util/logic';
 
 export default class TeamTable extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showModal: false,
+            showUpdateModal: false,
             indextodelete: -1,
         }
 
+        this.teamToUpdate = {};
+    
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
         this.updateCell = this.updateCell.bind(this);
@@ -22,11 +24,11 @@ export default class TeamTable extends React.Component {
     }
 
     handleShowModal() {
-	    this.setState({ showModal: true });
+	    this.setState({ showUpdateModal: true });
     }
     
 	handleCloseModal() {
-		this.setState({ showModal: false });
+		this.setState({ showUpdateModal: false });
 	}
 
     deleteTeam = TID => () => {
@@ -50,6 +52,7 @@ export default class TeamTable extends React.Component {
             },
             }).then((res) => res.json())
             .then((result) => {
+                window.location.reload();
                 <Alert variant='success'>Team Deleted Successfully!</Alert>
             },
             (err) => {
@@ -58,18 +61,13 @@ export default class TeamTable extends React.Component {
         }
 
     updateCell = TID => () => {
-        console.log('TID of cell to me updated', TID)
+        this.teamToUpdate = this.props.teams.filter(team => team.TID === TID)[0];
+        this.handleShowModal();
     }
 
     renderTeam(team, index) {
         return (
-            <tr key={team.TID}>
-                <th onDoubleClick={this.updateCell(team.TID)}>
-                    {team.TeamName}
-                </th>
-                <th>
-                   { team.TeamName}
-                </th>
+            <tr key={team.TID} onDoubleClick={this.updateCell(team.TID)}>
                 <th>
                     {team.TeamName}
                 </th>
@@ -77,13 +75,16 @@ export default class TeamTable extends React.Component {
                    { team.TeamName}
                 </th>
                 <th>
-                    {team.TeamName}
+                    {logic.make_record(team.Wins, team.Loses, team.Ties)}
+                </th>
+                <th>
+                   { team.HomeTown}
+                </th>
+                <th>
+                    {team.SchoolName}
                 </th>
                 <th onClick={this.deleteTeam(team.TID)}>
                    <FaTrash />
-                </th>
-                <th>
-                    <FaPen />
                 </th>
             </tr>
         )
@@ -121,6 +122,7 @@ export default class TeamTable extends React.Component {
                         {this.props.teams == [] ? <tr></tr> : this.props.teams.map(this.renderTeam)}
                     </tbody>
                 </Table>
+                <UpdateTeamModal updateTeam={this.teamToUpdate} show={this.state.showUpdateModal} onHide={this.handleCloseModal} />
             </div>
         )
     }   
