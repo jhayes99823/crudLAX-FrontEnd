@@ -3,6 +3,10 @@ import LabelPage from '../../../components/Label/label.component';
 import { Container, Button } from 'react-bootstrap';
 import TeamTable from '../../../components/TeamTable/TeamTable.component';
 import CreateTeamModal from '../../../components/Team/CreateTeam.component';
+import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
+
+import qb from '../../../util/query-builder';
+import CreateActivityModal from '../../../components/Activity/CreateActivityModal.component';
 
 export default class CoachHomePage extends React.Component {
     constructor(props) {
@@ -10,51 +14,50 @@ export default class CoachHomePage extends React.Component {
         
         this.state = {
             teams: [],
+            activities: [],
             showModal: false,
+            showActModal: false,
             userid: null,
         }
 
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleShowModalAct = this.handleShowModalAct.bind(this);
+        this.handleCloseModalAct = this.handleCloseModalAct.bind(this);
     }
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
-        
-        console.log('loggedin', loggedUser);
-        console.log('state', this.state);
-        const url = 'api/teams';
-        var params = {
-            username: loggedUser.Username
-        };
+       
+        const usernameReq = qb.queryBuilder('api/teams',  { username: loggedUser.Username }, 'GET');       
 
-        var esc = encodeURIComponent;
-        var query = Object.keys(params)
-            .map(k => esc(k) + '=' + esc(params[k]))
-            .join('&');
+        const activityReq = qb.queryBuilder('api/activity', { username: loggedUser.Username }, 'GET');
 
-        console.log('query', query);
-
-        var request = new Request(url + "?" + query, {
-            method: 'GET'
-        })
-
-        fetch(request, {
+        fetch(usernameReq, {
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then((res) => res.json())
         .then((result) => {
-            console.log('result', result);
-            // localStorage.setItem('teams', JSON.stringify(result.teams));
             this.setState({
                 teams: result.teams,
                 userid: result.user[0].ID
             });
-            console.log('state', this.state);
         },
         (err) => {
             console.log(err)
+        })
+
+        fetch(activityReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log('res from act call', result);
+            this.setState({
+                activities: result.activities
+            })
         })
       }
 
@@ -65,6 +68,14 @@ export default class CoachHomePage extends React.Component {
     
 	handleCloseModal() {
 		this.setState({ showModal: false });
+    }
+    
+    handleShowModalAct() {
+	    this.setState({ showActModal: true });
+    }
+    
+	handleCloseModalAct() {
+		this.setState({ showActModal: false });
 	}
 
     render() {
@@ -72,9 +83,25 @@ export default class CoachHomePage extends React.Component {
             <div>
                 <Container>
                     <LabelPage padding="10px" text="Your Teams" bcolor="grey" topperc="12%" leftperc="10%"/>
-                    <TeamTable teams={this.state.teams} topperc="12%" leftperc="20%" />
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <TeamTable teams={this.state.teams}/>
                     <Button onClick={this.handleShowModal}>Create Team</Button>
                     <CreateTeamModal coachid={this.state.userid} show={this.state.showModal} onHide={this.handleCloseModal} />
+                </Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Container>
+                    <LabelPage padding="10px" text="Your Activities" bcolor="grey" topperc="50%" leftperc="10%"/>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    {console.log(this.state.activities)}
+                    <ActivityTable activities={this.state.activities}/>
+                    <Button onClick={this.handleShowModalAct}>Create Activity</Button>
+                    <CreateActivityModal coachid={this.state.userid} teams={this.state.teams} show={this.state.showActModal} onHide={this.handleShowModalAct} />
                 </Container>
             </div>
         )

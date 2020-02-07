@@ -1,18 +1,101 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Form, Row, Col, Button, Container } from 'react-bootstrap';
+import USState from '../../util/states';
 
 export default class UpdateTeamModal extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        this.state = {
+            teamname: '',
+            isActive: '',
+            hometown: '',
+            schoolname: '',
+            state: ''
+        }
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.setValue = this.setValue.bind(this);
     }
+
+    setValue(event) {
+        this.setState({[event.target.name]: event.target.value});
+    }
+
+    componentWillReceiveProps() {
+        console.log('in here');
+        console.log('getting props', this.props)
+    }
+
+    onSubmit(event) {
+        event.preventDefault();
+        const newTeam = {
+            teamname: this.state.teamname,
+            isActive: true,
+            coachid: this.props.coachid,
+            hometown: this.state.hometown,
+            schoolname: this.state.schoolname,
+            state: this.state.state
+        }
+        fetch('/api/teams/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newTeam)
+        }).then((Response) => Response.json())
+            .then((result) => {
+                console.log(result);
+                if (result.success == true) {
+                   window.location.reload();
+                }
+                else {
+                    alert('something went wrong')
+                }
+            })
+        }
 
     render() {
         return (
             <div>
-                <Modal {...this.props} centered>
+                <Modal show={this.props.show} onHide={this.props.onHide} centered>
                     <Modal.Header>
                         Update Team
                     </Modal.Header>
+                    <Modal.Body>
+                    <Container className="form-border centered">
+                    <Form onSubmit={this.onSubmit}>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formTeamname">
+                                <Form.Label>Team Name</Form.Label>
+                                <Form.Control name="teamname" type="text" defaultValue={this.state.teamname} onChange={this.setValue} />
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formHometown">
+                                <Form.Label>Home Town</Form.Label>
+                                <Form.Control name="hometown" type="text" placeholder="Enter Home Town" onChange={this.setValue} />
+                            </Form.Group>
+                        </Form.Row>
+                        
+                        <Form.Row>
+
+                            <Form.Group as={Col} controlId="formSchool">
+                                <Form.Label>School</Form.Label>
+                                <Form.Control name="school" type="text" placeholder="Enter School Name" onChange={this.setValue} />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="schoolyr">
+                                <Form.Label>State</Form.Label>
+                                <Form.Control name="schoolyr" as="select" placeholder="Enter School Yr" onChange={this.setValue}>
+                                    {USState.map((state) => <option>{state}</option>)}
+                                </Form.Control>
+                            </Form.Group>
+                        </Form.Row>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </Container>
+                    </Modal.Body>
                 </Modal>
             </div>
         )
