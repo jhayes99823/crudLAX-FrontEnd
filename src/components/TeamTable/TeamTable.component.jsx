@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Alert } from 'react-bootstrap';
+import { Table, Alert, Button } from 'react-bootstrap';
 
 import { FaTrash, FaPen } from 'react-icons/fa';
 import UpdateTeamModal from '../Team/UpdateTeamModal.component';
@@ -83,6 +83,9 @@ export default class TeamTable extends React.Component {
                 <th>
                     {team.SchoolName}
                 </th>
+                <th>
+                    <Button>More Info</Button>
+                </th>
                 <th onClick={this.deleteTeam(team.TID)}>
                    <FaTrash />
                 </th>
@@ -116,6 +119,8 @@ export default class TeamTable extends React.Component {
                             <th>
                                 School
                             </th>
+                            <th>More Info</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

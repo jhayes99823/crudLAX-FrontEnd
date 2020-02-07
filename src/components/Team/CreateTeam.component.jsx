@@ -77,7 +77,7 @@ export default class CreateTeamModal extends React.Component {
 
                             <Form.Group as={Col} controlId="formSchool">
                                 <Form.Label>School</Form.Label>
-                                <Form.Control name="school" type="text" placeholder="Enter School Name" onChange={this.setValue} />
+                                <Form.Control name="schoolname" type="text" placeholder="Enter School Name" onChange={this.setValue} />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="schoolyr">
