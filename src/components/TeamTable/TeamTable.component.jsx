@@ -12,7 +12,6 @@ export default class TeamTable extends React.Component {
         this.state = {
             showModal: false,
             indextodelete: -1,
-            teams: []   
         }
 
         this.renderTeam = this.renderTeam.bind(this);
@@ -44,6 +43,7 @@ export default class TeamTable extends React.Component {
         var request = new Request(url + "?" + query, {
             method: 'DELETE'
         })
+        
         fetch(request, {
             headers: {
                 'Content-Type': 'application/json'
@@ -90,7 +90,6 @@ export default class TeamTable extends React.Component {
     }
 
     render() {
-        const coachesTeams = JSON.parse(localStorage.getItem('teams'));
         const styles = {
             'left': this.props.leftperc,
             'top': this.props.topperc
@@ -119,7 +118,7 @@ export default class TeamTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {coachesTeams.map(this.renderTeam)}
+                        {this.props.teams == [] ? <tr></tr> : this.props.teams.map(this.renderTeam)}
                     </tbody>
                 </Table>
             </div>
