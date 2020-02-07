@@ -82,13 +82,12 @@ export default class Login extends React.Component{
             <div>
                 <Container>
                     <Form onSubmit={this.onSubmit}>
+                        <Form.Group></Form.Group>
                         <Form.Group controlId="formUsername">
-                            <Form.Label>Username</Form.Label>
                             <Form.Control name="username" type="text" placeholder="Enter Username" onChange={this.setValue} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
                             <Form.Control name="password" type="password" placeholder="Enter Password" onChange={this.setValue} />
                         </Form.Group>
                         <Button variant="primary" type="submit">
