@@ -78,7 +78,7 @@ export default class TeamTable extends React.Component {
                     {logic.make_record(team.Wins, team.Loses, team.Ties)}
                 </th>
                 <th>
-                   { team.HomeTown}
+                   {team.HomeTown}
                 </th>
                 <th>
                     {team.SchoolName}
