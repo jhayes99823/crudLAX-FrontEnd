@@ -8,6 +8,7 @@ import TeamTable from '../../../components/TeamTable/TeamTable.component';
 import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
 
 import styles from './styles.css';
+import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 
 export default class PlayerHomePage extends React.Component {
     
@@ -16,12 +17,22 @@ export default class PlayerHomePage extends React.Component {
             <div>
                  <Container>
                     <Row>
-                        <LabelPage padding="10px" text="Your Teams" bcolor="grey" topperc="12%" leftperc="10%"/>
+                        <LabelPage padding="10px" text="Your Teams" bcolor="grey" topperc="12%" leftperc="10%" />
+                        
                     </Row>
                     <Row>
                         <LabelPage padding="10px" text="Your Activities" bcolor="grey" topperc="25%" leftperc="10%"/>
-                        <ActivityTable />
                     </Row>
+                    <Row>
+                        <ActivityTable />
+
+
+
+                        
+                        <LabelPage padding="10px" text="Your Games" bcolor="grey" topperc="35%" leftperc="10%"/>
+                        <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/>
+                    </Row>
+                        <GameTable/>
                 </Container>
             </div>
             
