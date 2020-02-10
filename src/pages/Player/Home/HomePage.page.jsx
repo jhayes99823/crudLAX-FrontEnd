@@ -7,7 +7,7 @@ import LabelPage from '../../../components/Label/label.component';
 import TeamTable from '../../../components/TeamTable/TeamTable.component';
 import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
 
-import styles from './styles.css';
+import styles from './styles.css'; //wiorerioweurweioruweioruweioruweioruweioruweioruweioruweioruweioruweioruweiorweioruweioruweioruweioruweioruweioruweioruweioruweioruwiou
 
 export default class PlayerHomePage extends React.Component {
     componentDidMount() {
