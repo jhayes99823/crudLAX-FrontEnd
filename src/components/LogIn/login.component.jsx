@@ -66,7 +66,7 @@ export default class Login extends React.Component{
                 if (result.success == true) {
                     console.log('putting in user', result.user)
                     localStorage.setItem('loggedIn', JSON.stringify(result.user[0]));
-                    if (result.user.Role == 'P') {
+                    if (result.user[0].Role == 'P') {
                         this.props.history.push('/player-home');
                     } else {
                         this.props.history.push('/coach-home');
