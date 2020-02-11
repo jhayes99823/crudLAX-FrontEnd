@@ -46,7 +46,7 @@ export default class GameTable extends React.Component {
             'left': this.props.leftperc,
             'top': this.props.topperc
         }
-
+            console.log(this.props.games)
         return (
             <div>
                 <Table striped bordered hover>

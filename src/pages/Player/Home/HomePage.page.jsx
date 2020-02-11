@@ -6,75 +6,90 @@ import { Container, Button, Row } from 'react-bootstrap';
 import LabelPage from '../../../components/Label/label.component';
 import TeamTable from '../../../components/TeamTable/TeamTable.component';
 import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
+import qb from '../../../util/query-builder';
 
 import styles from './styles.css';
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 
 export default class PlayerHomePage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            games: [],
+            userid: []
+        }
+    }
+
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
-        
-        console.log('loggedin', loggedUser);
-        console.log('state', this.state);
-        const url = '/api/activity/game/player';
-        var params = {
-            username: loggedUser.Username
-        };
+        console.log(loggedUser);
+        const gamesReq = qb.queryBuilder('api/activity/game/player', { username: loggedUser.Username }, 'GET');
 
-        var esc = encodeURIComponent;
-        var query = Object.keys(params)
-            .map(k => esc(k) + '=' + esc(params[k]))
-            .join('&');
-
-        console.log('query', query);
-
-        var request = new Request(url + "?" + query, {
-            method: 'GET'
-        })
-
-        fetch(request, {
+        fetch(gamesReq, {
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then((res) => res.json())
         .then((result) => {
-            console.log('result', result);
-            // localStorage.setItem('teams', JSON.stringify(result.teams));
             this.setState({
-                games: result.games,
-                userid: result.user[0].ID
-            });
-            console.log('state', this.state);
-        },
-        (err) => {
-            console.log(err)
+                games: result.activities,
+            })
+           console.log(this.state)
         })
+
+        // console.log('loggedin', loggedUser);
+        // console.log('state', this.state);
+        // const url = '/api/activity/game/player';
+        // var params = {
+        //     username: loggedUser.Username
+        // };
+
+        // var esc = encodeURIComponent;
+        // var query = Object.keys(params)
+        //     .map(k => esc(k) + '=' + esc(params[k]))
+        //     .join('&');
+
+        // console.log('query', query);
+
+        // var request = new Request(url + "?" + query, {
+        //     method: 'GET'
+        // })
+
+        // fetch(request, {
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        // }).then((res) => res.json())
+        // .then((result) => {
+        //     console.log('result', result);
+            // localStorage.setItem('teams', JSON.stringify(result.teams));
+            // this.setState({
+            //     games: result.games,
+            //     userid: result.user[0].ID
+        //     // });
+        //     console.log('state', this.state);
+        // },
+        // (err) => {
+        //     console.log(err)
+        // })
       }
 
-    
-    handleShowModal() {
-                  this.setState({ showModal: true });
-    }
-    
-              handleCloseModal() {
-                           this.setState({ showModal: false });
-    }
-    
     render() {
         return (
             <div>
                  <Container>
                     <Row>
-                        <LabelPage padding="10px" text="Your Teams" bcolor="grey" topperc="12%" leftperc="10%" />
+                    
                         
                     </Row>
                     <Row>
                         <LabelPage padding="10px" text="Your Activities" bcolor="grey" topperc="25%" leftperc="10%"/>
                     </Row>
                     <Row>
-                        <ActivityTable />
-                       
+                        {/* <ActivityTable /> */}
+                        <GameTable games={this.state.games}/>
 
                         <LabelPage padding="10px" text="Your Games" bcolor="grey" topperc="35%" leftperc="10%"/>
                         <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/>
@@ -86,7 +101,7 @@ export default class PlayerHomePage extends React.Component {
         )
     }
 
-    //GameTable games={this.state.games}/>
+    //<GameTable games={this.state.games}/>
 }
 
 
