@@ -6,10 +6,27 @@ export default class CreateStatForm extends React.Component {
         super(props);
 
         this.setValue = this.setValue.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    onSubmit(event) {
+        event.preventDefault();
+
+        const newStat = {}
+
+        fetch('/api/stat/create-stat', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newStat)
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log(result);
+        })
     }
 
     render() {
@@ -92,9 +109,6 @@ export default class CreateStatForm extends React.Component {
                         </Form.Group>
                         
                         </Form.Row>
-                        
-
-
     
                         <Button variant="primary" type="submit">
                             Enter Stat

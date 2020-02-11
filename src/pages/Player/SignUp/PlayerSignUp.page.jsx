@@ -15,15 +15,13 @@ export default class PlayerSignUpPage extends React.Component {
             password: '',
             number: '',
             schoolyr: '',
-            coachusername: '',
-            teamname: '',
-            role: 'Player'
+            role: 'P'
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.setValue = this.setValue.bind(this);
         this.getPosition = this.getPosition.bind(this);
-        this.getSchoolYr = this.getSchoolYr(this);
+        this.getSchoolYr = this.getSchoolYr.bind(this);
     }
     
     setValue(event) {
@@ -72,8 +70,8 @@ export default class PlayerSignUpPage extends React.Component {
             schoolyr: this.getSchoolYr(this.state.schoolyr),
             username: this.state.username,
             password: this.state.password,
-            coachusername: this.state.coachusername,
-            teamname: this.state.teamname
+            playable: 1,
+            role: this.state.role
         }
         fetch('/api/users/signup/player', {
             method: 'POST',
@@ -85,7 +83,7 @@ export default class PlayerSignUpPage extends React.Component {
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
                 }
                 else {
                     alert('something went wrong')
@@ -151,17 +149,6 @@ export default class PlayerSignUpPage extends React.Component {
                                     <option>Junior</option>
                                     <option>Senior</option>
                                 </Form.Control>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="coachusername">
-                                <Form.Label>Coach Username</Form.Label>
-                                <Form.Control name="coachusername" type="text" placeholder="Enter Coach Username" onChange={this.setValue} />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="teamname">
-                                <Form.Label>Team Name</Form.Label>
-                                <Form.Control name="teamname" type="text" placeholder="Enter Team Name" onChange={this.setValue} min="0" />
                             </Form.Group>
                         </Form.Row>
 
