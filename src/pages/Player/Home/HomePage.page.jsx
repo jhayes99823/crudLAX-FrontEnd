@@ -13,6 +13,7 @@ import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 export default class PlayerHomePage extends React.Component {
 
     componentDidMount() {
+<<<<<<< HEAD
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
         
         console.log('loggedin', loggedUser);
@@ -60,6 +61,19 @@ export default class PlayerHomePage extends React.Component {
               handleCloseModal() {
                            this.setState({ showModal: false });
     }
+=======
+        // this.callApi()
+        //     .then(res => console.log(res))
+        //     .catch(err => console.log(err));
+      }
+
+    // callApi = async () => {
+    //     const response = await fetch('/api/users');
+    //     const body = await response.json();
+    //     console.log(body);
+    //     return body.result[2];
+    // }
+>>>>>>> 0dc6c903a7bbbb14f73342b8a513c6a066b054d2
     
     render() {
         return (
