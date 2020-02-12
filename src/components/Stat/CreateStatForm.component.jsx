@@ -38,7 +38,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Goals</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid city.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -46,7 +46,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Assists</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid state.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -55,7 +55,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Forced Turnover</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -63,7 +63,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Saves</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -71,7 +71,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Ground Balls</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -79,7 +79,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>FaceOff Percentage</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -87,7 +87,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Pass Percentage</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please enter an integer
                         </Form.Control.Feedback>
                         </Form.Group>
                         
