@@ -11,6 +11,7 @@ import PlayerSignUpPage from './pages/Player/SignUp/PlayerSignUp.page';
 import CoachSignUpPage from './pages/Coach/SignUp/CoachSignUp.page';
 import CoachHomePage from './pages/Coach/Home/HomePage.page';
 import CreateStatForm from './components/Stat/CreateStatForm.component';
+import TeamMoreInfoPage from './pages/Coach/Team/TeamMoreInfoPage';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +30,8 @@ class App extends Component {
                 <Route path="/signup/player" component={PlayerSignUpPage} />
                 <Route path="/coach-home" component={CoachHomePage} />
                 <Route path="/signup/coach" component={CoachSignUpPage} />
-                <Route path="/create-stat" component={CreateStatForm} />
+                <Route path="/create-stat" component={CreateStatForm} />    
+                <Route path="/coach/team-info" component={TeamMoreInfoPage} />            
               </Switch>
       </div>
     );

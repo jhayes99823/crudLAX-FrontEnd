@@ -13,5 +13,10 @@ function findObjectByKey(array, key, value) {
     return null;
 }
 
+function concatName(fname, lname) {
+    return `${fname} ${lname}`;
+}
+
 exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
+exports.concatName = concatName;

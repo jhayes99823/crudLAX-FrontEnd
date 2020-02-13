@@ -4,8 +4,10 @@ import { Table, Alert, Button } from 'react-bootstrap';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import UpdateTeamModal from '../Team/UpdateTeamModal.component';
 import logic from '../../util/logic';
+import { queryBuilder } from '../../util/query-builder';
+import { withRouter } from 'react-router-dom';
 
-export default class TeamTable extends React.Component {
+class TeamTable extends React.Component {
     constructor(props) {
         super(props);
 
@@ -18,6 +20,7 @@ export default class TeamTable extends React.Component {
     
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
+        this.moreInfoTeamPage = this.moreInfoTeamPage.bind(this);
         this.updateCell = this.updateCell.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -32,21 +35,10 @@ export default class TeamTable extends React.Component {
 	}
 
     deleteTeam = TID => () => {
-        const url = '/api/teams';
-        var params = {
-            tid: TID
-        }
 
-        var esc = encodeURIComponent;
-        var query = Object.keys(params)
-            .map(k => esc(k) + '=' + esc(params[k]))
-            .join('&');
-
-        var request = new Request(url + "?" + query, {
-            method: 'DELETE'
-        })
+        var deleteTeamReq = queryBuilder('/api/team', { tid: TID }, 'DELETE');
         
-        fetch(request, {
+        fetch(deleteTeamReq, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -63,6 +55,11 @@ export default class TeamTable extends React.Component {
     updateCell = TID => () => {
         this.teamToUpdate = this.props.teams.filter(team => team.TID === TID)[0];
         this.handleShowModal();
+    }
+
+    moreInfoTeamPage = TID => () => {
+        localStorage.setItem('moreInfoTeam', TID);
+        this.props.history.push('/coach/team-info');
     }
 
     renderTeam(team, index) {
@@ -84,7 +81,7 @@ export default class TeamTable extends React.Component {
                     {team.SchoolName}
                 </th>
                 <th>
-                    <Button>More Info</Button>
+                    <Button onClick={this.moreInfoTeamPage(team.TID)}>More Info</Button>
                 </th>
                 <th onClick={this.deleteTeam(team.TID)}>
                    <FaTrash />
@@ -132,3 +129,5 @@ export default class TeamTable extends React.Component {
         )
     }   
 }
+
+export default withRouter(TeamTable);
