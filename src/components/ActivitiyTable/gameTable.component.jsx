@@ -6,7 +6,7 @@ export default class GameTable extends React.Component {
     constructor(props) {
         super(props);
     }
-//
+
     renderGame(game, index) {
         return (
             <tr key={game.id}>

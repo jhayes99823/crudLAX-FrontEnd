@@ -32,7 +32,7 @@ export default class TeamPlayerTable extends React.Component{
 
 
     }
-//
+
     render() {
         const styles = {
             'left': this.props.leftperc,

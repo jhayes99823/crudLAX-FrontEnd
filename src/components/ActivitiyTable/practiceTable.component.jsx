@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import GameDetailView from '../GameDetailView/GameDetailView.component';
 import logic from '../../util/logic';
 
-
+//this displays the player
 export default class PracticeTable extends React.Component {
     constructor(props) {
         super(props);
