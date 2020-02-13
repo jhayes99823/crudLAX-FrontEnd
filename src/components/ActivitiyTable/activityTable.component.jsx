@@ -36,6 +36,7 @@ export default class ActivityTable extends React.Component {
         this.handleShowModal();
     }
 
+    //
     renderActivity(activity, index) {
         return (
             <tr key={activity.id} >

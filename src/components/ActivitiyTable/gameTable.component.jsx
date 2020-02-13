@@ -6,13 +6,10 @@ export default class GameTable extends React.Component {
     constructor(props) {
         super(props);
     }
-
+//
     renderGame(game, index) {
         return (
             <tr key={game.id}>
-                <th>
-                    {game.id}
-                </th>
                 <th>
                     {game.Name}
                 </th>
@@ -52,7 +49,6 @@ export default class GameTable extends React.Component {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Name</th>
                             <th>Start Time</th>
                             <th>End Time</th>

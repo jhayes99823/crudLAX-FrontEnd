@@ -10,6 +10,8 @@ import qb from '../../../util/query-builder';
 
 import styles from './styles.css';
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
+import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
+import TeamPlayerTable from '../../../components/ActivitiyTable/teamPlayerTable.component';
 
 export default class PlayerHomePage extends React.Component {
 
@@ -18,7 +20,9 @@ export default class PlayerHomePage extends React.Component {
 
         this.state = {
             games: [],
-            userid: []
+            userid: [], 
+            practices: [], 
+            teams: []
         }
     }
 
@@ -39,6 +43,40 @@ export default class PlayerHomePage extends React.Component {
            console.log(this.state)
         })
 
+        const practiceReq = qb.queryBuilder('api/activity/practice/player', { username: loggedUser.Username }, 'GET');
+        fetch(practiceReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            if(result.success==true){
+                this.setState({
+                    practices: result.activities,
+                })
+            }
+        })
+
+        //get teams 
+
+        const teamsReq = qb.queryBuilder('api//activity/team/player', { username: loggedUser.Username }, 'GET');
+        fetch(practiceReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            if(result.success==true){
+                this.setState({
+                    teams: result.activities,
+                })
+            }
+        })
+    
+    
+    
+    }
+        
         // console.log('loggedin', loggedUser);
         // console.log('state', this.state);
         // const url = '/api/activity/game/player';
@@ -74,28 +112,34 @@ export default class PlayerHomePage extends React.Component {
         // (err) => {
         //     console.log(err)
         // })
-      }
+      
+        //
 
-    render() {
+    render() { //<LabelPage padding="10px" text="Your Games" bcolor="grey" t7/>
         return (
             <div>
                  <Container>
-                    <Row>
-                    
-                        
-                    </Row>
-                    <Row>
-                        <LabelPage padding="10px" text="Your Activities" bcolor="grey" topperc="25%" leftperc="10%"/>
-                    </Row>
-                    <Row>
+                     <LabelPage padding="8px" text="Your Team" bcolor="grey" topperc="25%" leftperc="7%"/>
+                   <TeamPlayerTable teams = {this.state.teams}></TeamPlayerTable>
+                </Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                 <Container>
+                 <LabelPage padding="8px" text="Your Games" bcolor="grey" topperc="45%" leftperc="7%"/>
                         {/* <ActivityTable /> */}
                         <GameTable games={this.state.games}/>
-
-                        <LabelPage padding="10px" text="Your Games" bcolor="grey" topperc="35%" leftperc="10%"/>
-                        <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/>
-                    </Row>
-                        
+                        {/* <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/> */}
                 </Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Container>
+                     <LabelPage padding="8px" text="Your Practice" bcolor="grey" topperc="55%" leftperc="7%"/>
+                    <PracticeTable practices = {this.state.practices}/> 
+                </Container>
+
+                
             </div>
             
         )

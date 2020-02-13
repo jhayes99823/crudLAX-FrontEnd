@@ -9,7 +9,7 @@ export default class TeamTable extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        this.state = { //
             showUpdateModal: false,
             indextodelete: -1,
         }
