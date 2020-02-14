@@ -4,7 +4,7 @@ import { Table, Alert, Button } from 'react-bootstrap';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import UpdateTeamModal from '../Team/UpdateTeamModal.component';
 import logic from '../../util/logic';
-import { queryBuilder } from '../../util/query-builder';
+import { queryBuilder, ErrorMapper } from '../../util/query-builder';
 import { withRouter } from 'react-router-dom';
 
 class TeamTable extends React.Component {
@@ -14,6 +14,9 @@ class TeamTable extends React.Component {
         this.state = {
             showUpdateModal: false,
             indextodelete: -1,
+            showAlert: false,
+            showDeleteSuccess: false,
+            ErrorCode: 0
         }
 
         this.teamToUpdate = {};
@@ -24,6 +27,8 @@ class TeamTable extends React.Component {
         this.updateCell = this.updateCell.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.showAlert = this.showAlert.bind(this);
+        this.closeAlert = this.closeAlert.bind(this);
     }
 
     handleShowModal() {
@@ -32,7 +37,23 @@ class TeamTable extends React.Component {
     
 	handleCloseModal() {
 		this.setState({ showUpdateModal: false });
-	}
+    }
+    
+    showAlert() {
+        this.setState({ showAlert: true });
+    }
+
+    closeAlert() {
+        this.setState({ showAlert: false });
+    }
+
+    showDeleteAlert() {
+        this.setState({ showDeleteSuccess: true });
+    }
+
+    closeDeleteAlert() {
+        this.setState({ showDeleteSuccess: false });
+    }
 
     deleteTeam = TID => () => {
 
@@ -44,11 +65,18 @@ class TeamTable extends React.Component {
             },
             }).then((res) => res.json())
             .then((result) => {
-                window.location.reload();
-                <Alert variant='success'>Team Deleted Successfully!</Alert>
+                if (result.success == true) {
+                    this.showDeleteAlert()
+                    window.location.reload();
+                } else {
+                    this.setState({
+                        ErrorCode: result.ErrorCode
+                    })
+                    this.showAlert();
+                }
             },
             (err) => {
-                console.log(err)
+                alert(err);
             })
         }
 
@@ -98,6 +126,8 @@ class TeamTable extends React.Component {
 
         return (
             <div>
+                <Alert show={this.state.showDeleteSuccess} onClose={this.closeDeleteAlert} dismissable variant='success'>Team Deleted Successfully!</Alert>
+                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>{ ErrorMapper(this.state.ErrorCode) }</Alert>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
