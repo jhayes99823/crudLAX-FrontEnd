@@ -4,7 +4,8 @@ import UserTypeModal from '../Modal/modal.component';
 
 import styles from './styles.css';
 import { Alert } from 'react-bootstrap';
-
+import util from '../../util/query-builder'
+;
 export default class Login extends React.Component{
     constructor(props) {
         super(props);
@@ -14,7 +15,8 @@ export default class Login extends React.Component{
             password: '',
             isCoach: this.props.isCoach,
             showModal: false,
-            showAlert: false
+            showAlert: false,
+            ErrorCode: 0
         }
 
         console.log(this.props)
@@ -73,7 +75,9 @@ export default class Login extends React.Component{
                     }
                 }
                 else {
-                    console.log('triny to show alert');
+                    this.setState({
+                        ErrorCode: result.ErrorCode
+                    })
                     this.showAlert();
                 }
             })
@@ -90,7 +94,7 @@ export default class Login extends React.Component{
     render() {
         return (
             <div>
-                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>Incorrect Password. Please Try Again.</Alert>
+                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>{ util.ErrorMapper(this.state.ErrorCode) }</Alert>
                 <Container>
                     <Form onSubmit={this.onSubmit}>
                         <Form.Group></Form.Group>

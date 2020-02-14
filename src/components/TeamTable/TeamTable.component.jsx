@@ -4,23 +4,31 @@ import { Table, Alert, Button } from 'react-bootstrap';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import UpdateTeamModal from '../Team/UpdateTeamModal.component';
 import logic from '../../util/logic';
+import { queryBuilder, ErrorMapper } from '../../util/query-builder';
+import { withRouter } from 'react-router-dom';
 
-export default class TeamTable extends React.Component {
+class TeamTable extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = { //
             showUpdateModal: false,
             indextodelete: -1,
+            showAlert: false,
+            showDeleteSuccess: false,
+            ErrorCode: 0
         }
 
         this.teamToUpdate = {};
     
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
+        this.moreInfoTeamPage = this.moreInfoTeamPage.bind(this);
         this.updateCell = this.updateCell.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.showAlert = this.showAlert.bind(this);
+        this.closeAlert = this.closeAlert.bind(this);
     }
 
     handleShowModal() {
@@ -29,40 +37,58 @@ export default class TeamTable extends React.Component {
     
 	handleCloseModal() {
 		this.setState({ showUpdateModal: false });
-	}
+    }
+    
+    showAlert() {
+        this.setState({ showAlert: true });
+    }
+
+    closeAlert() {
+        this.setState({ showAlert: false });
+    }
+
+    showDeleteAlert() {
+        this.setState({ showDeleteSuccess: true });
+    }
+
+    closeDeleteAlert() {
+        this.setState({ showDeleteSuccess: false });
+    }
 
     deleteTeam = TID => () => {
-        const url = '/api/teams';
-        var params = {
-            tid: TID
-        }
 
-        var esc = encodeURIComponent;
-        var query = Object.keys(params)
-            .map(k => esc(k) + '=' + esc(params[k]))
-            .join('&');
-
-        var request = new Request(url + "?" + query, {
-            method: 'DELETE'
-        })
+        var deleteTeamReq = queryBuilder('/api/team', { tid: TID }, 'DELETE');
         
-        fetch(request, {
+        fetch(deleteTeamReq, {
             headers: {
                 'Content-Type': 'application/json'
             },
             }).then((res) => res.json())
             .then((result) => {
-                window.location.reload();
-                <Alert variant='success'>Team Deleted Successfully!</Alert>
+                if (result.success == true) {
+                    this.showDeleteAlert()
+                    window.location.reload();
+                } else {
+                    this.setState({
+                        ErrorCode: result.ErrorCode
+                    })
+                    this.showAlert();
+                }
             },
             (err) => {
-                console.log(err)
+                alert(err);
             })
         }
 
     updateCell = TID => () => {
         this.teamToUpdate = this.props.teams.filter(team => team.TID === TID)[0];
+        localStorage.setItem('teamToUpdate', JSON.stringify(this.teamToUpdate));
         this.handleShowModal();
+    }
+
+    moreInfoTeamPage = TID => () => {
+        localStorage.setItem('moreInfoTeam', TID);
+        this.props.history.push('/coach/team-info');
     }
 
     renderTeam(team, index) {
@@ -84,7 +110,7 @@ export default class TeamTable extends React.Component {
                     {team.SchoolName}
                 </th>
                 <th>
-                    <Button>More Info</Button>
+                    <Button onClick={this.moreInfoTeamPage(team.TID)}>More Info</Button>
                 </th>
                 <th onClick={this.deleteTeam(team.TID)}>
                    <FaTrash />
@@ -92,6 +118,8 @@ export default class TeamTable extends React.Component {
             </tr>
         )
     }
+
+
 
     render() {
         const styles = {
@@ -101,6 +129,8 @@ export default class TeamTable extends React.Component {
 
         return (
             <div>
+                <Alert show={this.state.showDeleteSuccess} onClose={this.closeDeleteAlert} dismissable variant='success'>Team Deleted Successfully!</Alert>
+                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>{ ErrorMapper(this.state.ErrorCode) }</Alert>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -132,3 +162,5 @@ export default class TeamTable extends React.Component {
         )
     }   
 }
+
+export default withRouter(TeamTable);

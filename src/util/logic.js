@@ -1,3 +1,6 @@
+var dateFormat = require('dateformat');
+
+
 // make record string with
 // wins-losses-ties
 const make_record = (win, loss, ties) => {
@@ -13,5 +16,15 @@ function findObjectByKey(array, key, value) {
     return null;
 }
 
+function concatName(fname, lname) {
+    return `${fname} ${lname}`;
+}
+
+function formatDateTime(datetime) {
+    return dateFormat(datetime, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+}
+
 exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
+exports.concatName = concatName;
+exports.formatDateTime = formatDateTime;
