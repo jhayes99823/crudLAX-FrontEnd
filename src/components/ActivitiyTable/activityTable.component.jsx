@@ -43,10 +43,10 @@ export default class ActivityTable extends React.Component {
                     {activity.Name}
                 </th>
                 <th>
-                    {activity.StartTime}
+                    {logic.formatDateTime(activity.StartTime)}
                 </th>
                 <th>
-                    {activity.EndTime}
+                    {logic.formatDateTime(activity.EndTime)}
                 </th>
                 <th>
                     {activity.Location}
