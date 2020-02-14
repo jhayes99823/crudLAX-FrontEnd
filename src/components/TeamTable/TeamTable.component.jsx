@@ -82,6 +82,7 @@ class TeamTable extends React.Component {
 
     updateCell = TID => () => {
         this.teamToUpdate = this.props.teams.filter(team => team.TID === TID)[0];
+        localStorage.setItem('teamToUpdate', JSON.stringify(this.teamToUpdate));
         this.handleShowModal();
     }
 
@@ -117,6 +118,8 @@ class TeamTable extends React.Component {
             </tr>
         )
     }
+
+
 
     render() {
         const styles = {

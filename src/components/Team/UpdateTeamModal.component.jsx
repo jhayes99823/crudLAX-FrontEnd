@@ -7,46 +7,55 @@ export default class UpdateTeamModal extends React.Component {
         super(props);
 
         this.state = {
-            teamname: '',
-            isActive: '',
-            hometown: '',
-            schoolname: '',
-            state: ''
+            TeamName: '',
+            isActive: true,
+            HomeTown: '',
+            SchoolName: '',
+            State: '',
+            Wins: -1,
+            Loses: -1,
+            Ties: -1,
+            tid: -1
         }
 
         this.onSubmit = this.onSubmit.bind(this);
         this.setValue = this.setValue.bind(this);
     }
 
+    componentDidMount() {
+        console.log('getting update team and loc stor', localStorage);
+        const teamToUpdate = JSON.parse(localStorage.getItem('teamToUpdate'));
+        console.log('team to u', teamToUpdate)
+        this.setState({
+            TeamName: teamToUpdate.TeamName,
+            HomeTown: teamToUpdate.HomeTown,
+            SchoolName: teamToUpdate.SchoolName,
+            State: teamToUpdate.State,
+            Wins: teamToUpdate.Wins,
+            Loses: teamToUpdate.Loses,
+            Ties: teamToUpdate.Ties,
+            tid: teamToUpdate.TID
+        })
+    }
+
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    componentWillReceiveProps() {
-        console.log('in here');
-        console.log('getting props', this.props)
-    }
-
     onSubmit(event) {
         event.preventDefault();
-        const newTeam = {
-            teamname: this.state.teamname,
-            isActive: true,
-            coachid: this.props.coachid,
-            hometown: this.state.hometown,
-            schoolname: this.state.schoolname,
-            state: this.state.state
-        }
-        fetch('/api/teams/add', {
+        console.log('state b4 send', this.state);
+        fetch('/api/teams/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newTeam)
+            body: JSON.stringify(this.state)
         }).then((Response) => Response.json())
             .then((result) => {
                 console.log(result);
                 if (result.success == true) {
+                   window.location.reload();
                    window.location.reload();
                 }
                 else {
@@ -68,11 +77,11 @@ export default class UpdateTeamModal extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formTeamname">
                                 <Form.Label>Team Name</Form.Label>
-                                <Form.Control name="teamname" type="text" defaultValue={this.state.teamname} onChange={this.setValue} />
+                                <Form.Control name="TeamName" type="text" defaultValue={this.state.TeamName} onChange={this.setValue} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formHometown">
                                 <Form.Label>Home Town</Form.Label>
-                                <Form.Control name="hometown" type="text" placeholder="Enter Home Town" onChange={this.setValue} />
+                                <Form.Control name="HomeTown" type="text" placeholder="Enter Home Town" defaultValue={this.state.HomeTown} onChange={this.setValue} />
                             </Form.Group>
                         </Form.Row>
                         
@@ -80,18 +89,36 @@ export default class UpdateTeamModal extends React.Component {
 
                             <Form.Group as={Col} controlId="formSchool">
                                 <Form.Label>School</Form.Label>
-                                <Form.Control name="school" type="text" placeholder="Enter School Name" onChange={this.setValue} />
+                                <Form.Control name="SchoolName" type="text" placeholder="Enter School Name" defaultValue={this.state.SchoolName} onChange={this.setValue} />
                             </Form.Group>
 
-                            <Form.Group as={Col} controlId="schoolyr">
+                            <Form.Group as={Col} controlId="formState">
                                 <Form.Label>State</Form.Label>
-                                <Form.Control name="schoolyr" as="select" placeholder="Enter School Yr" onChange={this.setValue}>
+                                <Form.Control name="State" as="select" placeholder="Enter State" defaultValue={this.state.State} onChange={this.setValue}>
                                     {USState.map((state) => <option>{state}</option>)}
                                 </Form.Control>
                             </Form.Group>
                         </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="number">
+                                <Form.Label>Record</Form.Label>
+                                <Form.Row>
+                                    <Col>
+                                      <Form.Control defaultValue={this.state.Wins} name="Wins" type="number" placeholder="Enter Wins" onChange={this.setValue} min="0" />
+                                    </Col>
+                                    -
+                                    <Col>
+                                      <Form.Control defaultValue={this.state.Loses} name="Loses" type="number" placeholder="Enter Loses" onChange={this.setValue} min="0" />
+                                    </Col>
+                                    -
+                                    <Col>
+                                      <Form.Control defaultValue={this.state.Ties} name="Ties" type="number" placeholder="Enter Ties" onChange={this.setValue} min="0" />
+                                    </Col>
+                                </Form.Row>
+                            </Form.Group>
+                        </Form.Row>
                         <Button variant="primary" type="submit">
-                            Submit
+                            Update
                         </Button>
                     </Form>
                 </Container>

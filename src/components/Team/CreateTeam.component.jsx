@@ -80,9 +80,9 @@ export default class CreateTeamModal extends React.Component {
                                 <Form.Control name="schoolname" type="text" placeholder="Enter School Name" onChange={this.setValue} />
                             </Form.Group>
 
-                            <Form.Group as={Col} controlId="schoolyr">
+                            <Form.Group as={Col} controlId="state">
                                 <Form.Label>State</Form.Label>
-                                <Form.Control name="schoolyr" as="select" placeholder="Enter School Yr" onChange={this.setValue}>
+                                <Form.Control name="state" as="select" placeholder="Enter State" onChange={this.setValue}>
                                     {USState.map((state) => <option>{state}</option>)}
                                 </Form.Control>
                             </Form.Group>
