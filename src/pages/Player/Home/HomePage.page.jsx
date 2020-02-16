@@ -81,14 +81,14 @@ export default class PlayerHomePage extends React.Component {
         return (
             <div>
                  <Container>
-                     <LabelPage padding="8px" text="Your Team" bcolor="grey" topperc="25%" leftperc="7%"/>
+                     Your Team 
                    <TeamPlayerTable teams = {this.state.teams}></TeamPlayerTable>
                 </Container>
                 <br></br>
                 <br></br>
                 <br></br>
                  <Container>
-                 <LabelPage padding="8px" text="Your Games" bcolor="grey" topperc="45%" leftperc="7%"/>
+                        Your Game
                         {/* <ActivityTable /> */}
                         <GameTable games={this.state.games}/>
                         {/* <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/> */}
@@ -97,7 +97,8 @@ export default class PlayerHomePage extends React.Component {
                 <br></br>
                 <br></br>
                 <Container>
-                     <LabelPage padding="8px" text="Your Practice" bcolor="grey" topperc="55%" leftperc="7%"/>
+                    Your Practice 
+                     {/* <LabelPage padding="8px" text="Your Practice" bcolor="grey" topperc="55%" leftperc="7%"/> */}
                     <PracticeTable practices = {this.state.practices}/> 
                 </Container>
 
