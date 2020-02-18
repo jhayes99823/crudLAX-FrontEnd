@@ -39,10 +39,12 @@ export default class CoachHomePage extends React.Component {
             },
         }).then((res) => res.json())
         .then((result) => {
-            this.setState({
-                teams: result.teams,
-                userid: result.user[0].ID
-            });
+            if (result.success) {
+                this.setState({
+                    teams: result.teams,
+                    userid: result.user[0].ID
+                });
+            }
         },
         (err) => {
             console.log(err)
@@ -55,9 +57,11 @@ export default class CoachHomePage extends React.Component {
         }).then((res) => res.json())
         .then((result) => {
             console.log('res from act call', result);
-            this.setState({
-                activities: result.activities
-            })
+            if (result.success == true) {
+                this.setState({
+                    activities: result.activities
+                })
+            }
         })
       }
 
@@ -101,7 +105,7 @@ export default class CoachHomePage extends React.Component {
                     {console.log(this.state.activities)}
                     <ActivityTable activities={this.state.activities}/>
                     <Button onClick={this.handleShowModalAct}>Create Activity</Button>
-                    <CreateActivityModal coachid={this.state.userid} teams={this.state.teams} show={this.state.showActModal} onHide={this.handleShowModalAct} />
+                    <CreateActivityModal coachid={this.state.userid} teams={this.state.teams} show={this.state.showActModal} onHide={this.handleCloseModalAct} />
                 </Container>
             </div>
         )

@@ -26,16 +26,19 @@ export default class UpdateTeamModal extends React.Component {
         console.log('getting update team and loc stor', localStorage);
         const teamToUpdate = JSON.parse(localStorage.getItem('teamToUpdate'));
         console.log('team to u', teamToUpdate)
-        this.setState({
-            TeamName: teamToUpdate.TeamName,
-            HomeTown: teamToUpdate.HomeTown,
-            SchoolName: teamToUpdate.SchoolName,
-            State: teamToUpdate.State,
-            Wins: teamToUpdate.Wins,
-            Loses: teamToUpdate.Loses,
-            Ties: teamToUpdate.Ties,
-            tid: teamToUpdate.TID
-        })
+        if (teamToUpdate != null) {
+            this.setState({
+                TeamName: teamToUpdate.TeamName,
+                HomeTown: teamToUpdate.HomeTown,
+                SchoolName: teamToUpdate.SchoolName,
+                State: teamToUpdate.State,
+                Wins: teamToUpdate.Wins,
+                Loses: teamToUpdate.Loses,
+                Ties: teamToUpdate.Ties,
+                tid: teamToUpdate.TID
+            })
+        }
+
     }
 
     setValue(event) {
