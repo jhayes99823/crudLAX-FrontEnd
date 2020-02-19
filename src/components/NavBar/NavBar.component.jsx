@@ -14,7 +14,7 @@ export default class NavBar extends React.Component {
                     <Navbar.Brand href="/">c.r.u.dLAX</Navbar.Brand>
                     <Nav className="mr-auto">
                     <Nav.Link href={loggedUser == null ? "/" : "/coach-home"}>Home</Nav.Link>
-                    <Nav.Link href="/">Profile</Nav.Link>
+                    <Nav.Link href={loggedUser == null? "/" : "/player/profile"}>Profile</Nav.Link>
                     </Nav>
                 </Navbar>
             </div>
