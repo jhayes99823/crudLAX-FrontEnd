@@ -12,6 +12,7 @@ import styles from './styles.css';
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
 import TeamPlayerTable from '../../../components/ActivitiyTable/teamPlayerTable.component';
+import StatTable from '../../../components/StatTable/StatTable.component';
 
 export default class PlayerHomePage extends React.Component {
 
@@ -20,6 +21,7 @@ export default class PlayerHomePage extends React.Component {
 
         this.state = {
             games: [],
+            stats:[],
             userid: [], 
             practices: [], 
             teams: []
@@ -72,6 +74,21 @@ export default class PlayerHomePage extends React.Component {
                 })
             }
         })
+
+        const statReq = qb.queryBuilder('/api/stat/viewstat', { PID: loggedUser.ID }, 'GET');
+        fetch(statReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log(result.stats);
+            if(result.success==true){
+                this.setState({
+                    stats: result.stats,
+                })
+            }
+        })
     
     
     
@@ -95,13 +112,12 @@ export default class PlayerHomePage extends React.Component {
                 </Container>
                 <br></br>
                 <br></br>
+                <StatTable statit={this.state.stats} />
                 <br></br>
                 <Container>
                      <LabelPage padding="8px" text="Your Practice" bcolor="grey" topperc="55%" leftperc="7%"/>
                     <PracticeTable practices = {this.state.practices}/> 
                 </Container>
-
-                
             </div>
             
         )
