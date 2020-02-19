@@ -135,7 +135,10 @@ export default class PlayerHomePage extends React.Component {
                 </Container>
                 <br></br>
                 <br></br>
+                <Container>
+                    Your Stats
                 <StatTable statit={this.state.stats} />
+                </Container>
                 <br></br>
                 <Container>
                      Your Practices 
