@@ -70,8 +70,10 @@ class TeamMoreInfoPage extends React.Component {
                     <Button onClick={this.addPlayerOpen}>Add Player</Button>
                     <AddPlayerToRoster tid={this.TID} show={this.state.addPlayer} onHide={this.addPlayerClose} />
                 </Container>
+                {/* //Insert Team Average View Here */}
             </div>
         )
+        
     }
 }
 

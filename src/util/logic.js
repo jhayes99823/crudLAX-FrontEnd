@@ -24,6 +24,19 @@ function formatDateTime(datetime) {
     return dateFormat(datetime, "dddd, mmmm dS, yyyy, h:MM:ss TT");
 }
 
+function createPairList(teams, activities) {
+    const pairLinks = {};
+    const pairs = []
+    teams.forEach(function(teams, id) {
+        pairLinks.push({teamid: id})
+    })
+    activities.forEach(function(activities, id) {
+        pairLinks.push({activityid: id})
+    })
+    return pairLinks
+    //Make one object with each team id and game id
+}
+
 exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
 exports.concatName = concatName;

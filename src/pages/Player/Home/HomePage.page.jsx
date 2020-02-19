@@ -12,6 +12,7 @@ import styles from './styles.css';
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
 import TeamPlayerTable from '../../../components/ActivitiyTable/teamPlayerTable.component';
+import StatTable from '../../../components/StatTable/StatTable.component';
 import UpdatePlayerProfile from '../../../components/ActivitiyTable/updatePlayerProfile.component';
 import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.component';
 
@@ -25,6 +26,7 @@ export default class PlayerHomePage extends React.Component {
         this.playerProfile = {};
         this.state = {
             games: [],
+            stats:[],
             userid: [], 
             practices: [], 
             teams: [], 
@@ -97,7 +99,22 @@ export default class PlayerHomePage extends React.Component {
                 console.log(result); 
             }
         })
-        
+
+        const statReq = qb.queryBuilder('/api/stat/viewstat', { PID: loggedUser.ID }, 'GET');
+        fetch(statReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log(result.stats);
+            if(result.success==true){
+                this.setState({
+                    stats: result.stats,
+                })
+            }
+        })
+    
     
     
     }
@@ -120,6 +137,10 @@ export default class PlayerHomePage extends React.Component {
                 </Container>
                 <br></br>
                 <br></br>
+                <Container>
+                    Your Stats
+                <StatTable statit={this.state.stats} />
+                </Container>
                 <br></br>
                 <Container>
                      Your Practices 

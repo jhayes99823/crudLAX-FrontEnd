@@ -42,11 +42,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Group controlId="Form.ControlSelect">
                         <Form.Label>Select Game</Form.Label>
                         <Form.Control as="select">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        {this.props.game == [] ? <tr></tr> : this.props.game.map(this.renderGame)}
                         </Form.Control>
                         </Form.Group>
 
@@ -55,7 +51,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Goals</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid city.
+                            Please provide a valid Goals.
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -63,7 +59,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Assists</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid state.
+                            Please provide a valid Assist.
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -72,7 +68,7 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Forced Turnover</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please provide a valid Forced Turnover.
                         </Form.Control.Feedback>
                         </Form.Group>
 
@@ -80,31 +76,47 @@ export default class CreateStatForm extends React.Component {
                         <Form.Label>Saves</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please provide a valid Save.
                         </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group as={Col} md="2" controlId="validationCustom04">
-                        <Form.Label>Ground Balls</Form.Label>
+                        <Form.Label>Groundballs</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please provide a valid Groundball.
                         </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group as={Col} md="2" controlId="validationCustom05">
-                        <Form.Label>FaceOff Percentage</Form.Label>
+                        <Form.Label>Faceoff Success</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please provide a valid Faceoff Success.
                         </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group as={Col} md="2" controlId="validationCustom06">
-                        <Form.Label>Pass Percentage</Form.Label>
+                        <Form.Label>FaceOff Total</Form.Label>
                         <Form.Control type="number" placeholder="0" required />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid zip.
+                            Please provide a Faceoff Total.
+                        </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="2" controlId="validationCustom07">
+                        <Form.Label>Pass Total</Form.Label>
+                        <Form.Control type="number" placeholder="0" required />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a Pass Total.
+                        </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="2" controlId="validationCustom08">
+                        <Form.Label>Pass Success</Form.Label>
+                        <Form.Control type="number" placeholder="0" required />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide a Pass Success.
                         </Form.Control.Feedback>
                         </Form.Group>
                         
