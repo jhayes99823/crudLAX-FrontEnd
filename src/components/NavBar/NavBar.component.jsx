@@ -13,7 +13,7 @@ export default class NavBar extends React.Component {
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/">c.r.u.dLAX</Navbar.Brand>
                     <Nav className="mr-auto">
-                    <Nav.Link href={loggedUser == null ? "/" : "/coach-home"}>Home</Nav.Link>
+                    <Nav.Link href={(loggedUser == null) ? "/" : ((loggedUser.Role == 'P') ? '/player-home' : '/coach-home')}>Home</Nav.Link>
                     <Nav.Link href={loggedUser == null? "/" : "/player/profile"}>Profile</Nav.Link>
                     </Nav>
                 </Navbar>

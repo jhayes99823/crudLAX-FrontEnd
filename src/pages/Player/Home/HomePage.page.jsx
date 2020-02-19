@@ -43,7 +43,9 @@ export default class PlayerHomePage extends React.Component {
         }).then((res) => res.json())
         .then((result) => {
             console.log('plyayer info req', result);
-            localStorage.setItem('playerProfile', JSON.stringify(result[0].playerProfileInfo));
+            if (result.success) {
+                localStorage.setItem('playerProfile', JSON.stringify(result.playerProfileInfo));
+            }
         })
 
         //get the player games

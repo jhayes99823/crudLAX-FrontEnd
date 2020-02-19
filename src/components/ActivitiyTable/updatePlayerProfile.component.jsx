@@ -26,7 +26,7 @@ export default class UpdatePlayerProfile extends React.Component {
     const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
     const playerProfile = JSON.parse(localStorage.getItem('playerProfile'));
     console.log('player profiel in update player profile', playerProfile);
-    if(playerProfile[0]!=null){
+    if(playerProfile!=null){
         this.setState({
           UserName: loggedUser.Username,
           FirstName: playerProfile[0].Fname,
@@ -70,8 +70,8 @@ export default class UpdatePlayerProfile extends React.Component {
   render() {
     return (
 
-    
-          <Form onSubmit={this.onSubmit}>
+        <Container>
+             <Form onSubmit={this.onSubmit}>
             <Form.Row>
               <Form.Group as={Col} controlId="formFirstName">
                 <Form.Label>First Name </Form.Label>
@@ -121,6 +121,8 @@ export default class UpdatePlayerProfile extends React.Component {
           </Form>
       
 
+        </Container>
+         
     );
   }
 } 
