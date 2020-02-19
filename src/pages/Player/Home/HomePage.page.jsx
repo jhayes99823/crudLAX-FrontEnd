@@ -12,24 +12,42 @@ import styles from './styles.css';
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
 import TeamPlayerTable from '../../../components/ActivitiyTable/teamPlayerTable.component';
+import UpdatePlayerProfile from '../../../components/ActivitiyTable/updatePlayerProfile.component';
+import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.component';
+
 
 export default class PlayerHomePage extends React.Component {
 
     constructor(props) {
         super(props);
+        
 
+        this.playerProfile = {};
         this.state = {
             games: [],
             userid: [], 
             practices: [], 
-            teams: []
+            teams: [], 
         }
     }
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
         console.log(loggedUser);
-        const gamesReq = qb.queryBuilder('api/activity/game/player', { username: loggedUser.Username }, 'GET');
+
+        const playerInfoReq = qb.queryBuilder('/api/activity/player/profileInfo', {username: loggedUser.Username}, 'GET');
+        fetch(playerInfoReq, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log('plyayer info req', result);
+            localStorage.setItem('playerProfile', JSON.stringify(result[0].playerProfileInfo));
+        })
+
+        //get the player games
+        const gamesReq = qb.queryBuilder('/api/activity/game/player', { username: loggedUser.Username }, 'GET');
 
         fetch(gamesReq, {
             headers: {
@@ -37,16 +55,17 @@ export default class PlayerHomePage extends React.Component {
             },
         }).then((res) => res.json())
         .then((result) => {
-            if (result.success) {
-                this.setState({
-                    games: result.activities,
-                })
-            }
-
+            if(result.success==true) {
+            this.setState({
+                games: result.activities,
+            })
            console.log(this.state)
+          } 
         })
 
-        const practiceReq = qb.queryBuilder('api/activity/practice/player', { username: loggedUser.Username }, 'GET');
+        //get the player practices
+
+        const practiceReq = qb.queryBuilder('/api/activity/practice/player', { username: loggedUser.Username }, 'GET');
         fetch(practiceReq, {
             headers: {
                 'Content-Type': 'application/json'
@@ -60,10 +79,10 @@ export default class PlayerHomePage extends React.Component {
             }
         })
 
-        //get teams 
-
-        const teamsReq = qb.queryBuilder('api//activity/team/player', { username: loggedUser.Username }, 'GET');
-        fetch(practiceReq, {
+        //get the team information of player 
+        const teamsReq = qb.queryBuilder('/api/activity/team/player/information', { username: loggedUser.Username }, 'GET');
+        console.log(teamsReq); 
+        fetch(teamsReq, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -71,11 +90,12 @@ export default class PlayerHomePage extends React.Component {
         .then((result) => {
             if(result.success==true){
                 this.setState({
-                    teams: result.activities,
+                    teams: result.teams,
                 })
+                console.log(result); 
             }
         })
-    
+        
     
     
     }
@@ -84,14 +104,14 @@ export default class PlayerHomePage extends React.Component {
         return (
             <div>
                  <Container>
-                     <LabelPage padding="8px" text="Your Team" bcolor="grey" topperc="25%" leftperc="7%"/>
+                     Your team information 
                    <TeamPlayerTable teams = {this.state.teams}></TeamPlayerTable>
                 </Container>
                 <br></br>
                 <br></br>
                 <br></br>
                  <Container>
-                 <LabelPage padding="8px" text="Your Games" bcolor="grey" topperc="45%" leftperc="7%"/>
+                        Your Games 
                         {/* <ActivityTable /> */}
                         <GameTable games={this.state.games}/>
                         {/* <LabelPage padding="10px" text="Your Practices" bcolor="grey" topperc="45%" leftperc="10%"/> */}
@@ -100,11 +120,9 @@ export default class PlayerHomePage extends React.Component {
                 <br></br>
                 <br></br>
                 <Container>
-                     <LabelPage padding="8px" text="Your Practice" bcolor="grey" topperc="55%" leftperc="7%"/>
+                     Your Practices 
                     <PracticeTable practices = {this.state.practices}/> 
                 </Container>
-
-                
             </div>
             
         )
