@@ -8,15 +8,22 @@ export default class TeamPlayerTable extends React.Component{
 
     renderTeam(team, index){
         return(
+                
                 <tr key={team.id}>
                     <th>
                         {team.TeamName}
                     </th>
                     <th>
-                        {team.HeadCoach}
+                        {team.CoachID }
                     </th>
                     <th>
-                        {logic.make_record(team.Wins, team.Loses, team.Ties)}
+                        {team.Wins}  
+                    </th>
+                    <th>
+                        {team.Loses} 
+                    </th>
+                    <th>
+                        {team.Ties}
                     </th>
                     <th>
                         {team.HomeTown}
@@ -38,7 +45,7 @@ export default class TeamPlayerTable extends React.Component{
             'left': this.props.leftperc,
             'top': this.props.topperc
         }
-            console.log(this.props.games)
+     
         return (
             <div>
                 <Table striped bordered hover>  
@@ -46,7 +53,9 @@ export default class TeamPlayerTable extends React.Component{
                         <tr>
                             <th>Team Name</th>
                             <th>HeadCoach</th>
-                            <th>Record</th>
+                            <th> Wins</th>
+                            <th> Loses</th>
+                            <th> Ties</th>
                             <th>HomeTown</th>
                             <th>School</th>
                         </tr>

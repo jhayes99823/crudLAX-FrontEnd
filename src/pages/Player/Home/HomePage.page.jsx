@@ -28,13 +28,23 @@ export default class PlayerHomePage extends React.Component {
             userid: [], 
             practices: [], 
             teams: [], 
-            updatePlayeProfile:  []
         }
     }
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
         console.log(loggedUser);
+
+        const playerInfoReq = qb.queryBuilder('/api/activity/player/profileInfo', {username: loggedUser.Username}, 'GET');
+        fetch(playerInfoReq, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log('plyayer info req', result);
+            localStorage.setItem('playerProfile', JSON.stringify(result[0].playerProfileInfo));
+        })
 
         //get the player games
         const gamesReq = qb.queryBuilder('/api/activity/game/player', { username: loggedUser.Username }, 'GET');
