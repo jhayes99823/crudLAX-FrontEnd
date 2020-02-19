@@ -24,7 +24,7 @@ class TeamTable extends React.Component {
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
         this.moreInfoTeamPage = this.moreInfoTeamPage.bind(this);
-        this.updateCell = this.updateCell.bind(this);
+        this.updateCell = this.updateCell.bind(this); // make sure to add to modal
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.showAlert = this.showAlert.bind(this);
@@ -79,7 +79,10 @@ class TeamTable extends React.Component {
                 alert(err);
             })
         }
-
+        
+        // when cell is double clicked it stores the team that 
+        // is to be updated and shows 
+        // shows the modal
     updateCell = TID => () => {
         this.teamToUpdate = this.props.teams.filter(team => team.TID === TID)[0];
         localStorage.setItem('teamToUpdate', JSON.stringify(this.teamToUpdate));
