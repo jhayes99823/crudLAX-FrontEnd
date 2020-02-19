@@ -92,6 +92,7 @@ class TeamTable extends React.Component {
     }
 
     renderTeam(team, index) {
+        console.log('team in render team', team);
         return (
             <tr key={team.TID} onDoubleClick={this.updateCell(team.TID)}>
                 <th>

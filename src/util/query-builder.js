@@ -38,9 +38,9 @@ function ErrorMapper(val) {
         case -12:
             return "Practice Doesn't Exist";
         case -13:
-            return 'Incorrect Password';
+            return 'Invalid Combo of Username and Password';
         case -14:
-            return 'User Not Found';
+            return 'Invalid Combo of Username and Password';
     }
 }
 

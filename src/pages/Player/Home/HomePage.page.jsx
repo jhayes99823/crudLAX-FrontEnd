@@ -37,9 +37,12 @@ export default class PlayerHomePage extends React.Component {
             },
         }).then((res) => res.json())
         .then((result) => {
-            this.setState({
-                games: result.activities,
-            })
+            if (result.success) {
+                this.setState({
+                    games: result.activities,
+                })
+            }
+
            console.log(this.state)
         })
 

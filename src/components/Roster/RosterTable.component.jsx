@@ -22,6 +22,7 @@ export default class RosterTable extends React.Component {
             },
             }).then((res) => res.json())
             .then((result) => {
+                console.log('res in rsoter table', result);
                 if (result.success == true) {
                     window.location.reload();
                 } else {

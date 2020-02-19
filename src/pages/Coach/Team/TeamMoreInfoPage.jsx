@@ -42,7 +42,7 @@ class TeamMoreInfoPage extends React.Component {
             },
         }).then((res) => res.json())
         .then((result) => {
-            console.log(result);
+            console.log('res in team mroe info page', result);
             this.setState({
                 players: result.players,
             })
