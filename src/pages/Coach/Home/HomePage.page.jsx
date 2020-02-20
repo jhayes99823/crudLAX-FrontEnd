@@ -18,9 +18,6 @@ export default class CoachHomePage extends React.Component {
             showActModal: false,
             userid: null,
         }
-
-        this.handleShowModal = this.handleShowModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
     componentDidMount() {
@@ -48,16 +45,6 @@ export default class CoachHomePage extends React.Component {
 
       }
 
-    
-    handleShowModal() {
-	    this.setState({ showModal: true });
-    }
-    
-	handleCloseModal() {
-		this.setState({ showModal: false });
-    }
-    
-
     render() {
         return( 
             <div>
@@ -69,18 +56,6 @@ export default class CoachHomePage extends React.Component {
                     <TeamTable teams={this.state.teams}/>
                     <Button onClick={this.handleShowModal}>Create Team</Button>
                     <CreateTeamModal coachid={this.state.userid} show={this.state.showModal} onHide={this.handleCloseModal} />
-                </Container>
-                <br></br>
-                <br></br>
-                <br></br>
-                <Container>
-                    <LabelPage padding="10px" text="Your Activities" bcolor="grey" topperc="50%" leftperc="10%"/>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    {console.log(this.state.activities)}
-                    <ActivityTable activities={this.state.activities}/>
-                    <Button onClick={this.handleShowModalAct}>Create Activity</Button>
                 </Container>
             </div>
         )
