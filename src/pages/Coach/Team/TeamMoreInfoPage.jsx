@@ -5,6 +5,11 @@ import { Button, Container } from 'react-bootstrap';
 import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.component';
 import LabelPage from '../../../components/Label/label.component';
 import { withRouter } from 'react-router-dom';
+import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
+import GameTable from '../../../components/ActivitiyTable/gameTable.component';
+import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
+import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
+
 
 class TeamMoreInfoPage extends React.Component {
     constructor(props) {
@@ -12,17 +17,42 @@ class TeamMoreInfoPage extends React.Component {
 
         this.state = {
             players: [],
-            addPlayer: false
+            practices: [],
+            games: [],
+            addPlayer: false,
+            showGameModal: false,
+            showPracticeModal: false,
         }
 
-        this.loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
         this.TID = JSON.parse(localStorage.getItem('moreInfoTeam'));
-
+        this.loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
 
         this.addPlayerOpen = this.addPlayerOpen.bind(this);
         this.addPlayerClose = this.addPlayerClose.bind(this);
 
+        this.showGameModal = this.showGameModal.bind(this);
+        this.closeGameModal = this.closeGameModal.bind(this);
+
+        this.showPracticeModal = this.showPracticeModal.bind(this);
+        this.closePracticeModal = this.closePracticeModal.bind(this);
+
         this.moveBack = this.moveBack.bind(this);
+    }
+
+    showGameModal() {
+	    this.setState({ showGameModal: true });
+    }
+    
+	closeGameModal() {
+		this.setState({ showGameModal: false });
+    }
+    
+    showPracticeModal() {
+        this.setState({ showPracticeModal: true })
+    }
+
+    closePracticeModal() {
+        this.setState({ showPracticeModal: false })
     }
 
     addPlayerOpen() {
@@ -51,6 +81,36 @@ class TeamMoreInfoPage extends React.Component {
             console.log(err);
         }
         )
+
+        const teamPracticesReq = queryBuilder('/api/coach/team/practice', { username: this.loggedUser.Username, tid: this.TID}, 'GET');
+
+        fetch(teamPracticesReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            if (result.success) {
+                this.setState({
+                    practices: result.practices
+                })
+            }
+        })
+
+        const teamGameReq = queryBuilder('/api/coach/team/game', { username: this.loggedUser.Username, tid: this.TID}, 'GET');
+
+        fetch(teamGameReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            if (result.success) {
+                this.setState({
+                    games: result.games
+                })
+            }
+        })
     }
 
     moveBack() {
@@ -62,15 +122,33 @@ class TeamMoreInfoPage extends React.Component {
         return (
             <div>
                 <Container>
-                    <LabelPage padding="10px" text="Avaliable Players" bcolor="grey" topperc="12%" leftperc="10%"/>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                    Full List Of Players On Your Team
                     <RosterTable tid={this.TID} players={this.state.players} />
                     <Button onClick={this.addPlayerOpen}>Add Player</Button>
                     <AddPlayerToRoster tid={this.TID} show={this.state.addPlayer} onHide={this.addPlayerClose} />
                 </Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Container>
+                    Teams Assigned Games
+                    <GameTable games={this.state.games}/>
+                    <Button onClick={this.showGameModal}>Create A Game</Button>
+                </Container>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Container>
+                    Teams Assigned Practices
+                    <PracticeTable practices={this.state.practices}/>
+                    <Button onClick={this.showPracticeModal}>Create A Practice</Button>
+                </Container>
+                <br></br>
+                <br></br>
+                <br></br>
                 {/* //Insert Team Average View Here */}
+                <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
+                <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
             </div>
         )
         
