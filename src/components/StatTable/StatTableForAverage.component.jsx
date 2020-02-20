@@ -75,7 +75,7 @@ export default class StatTableForAverage extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {this.props.statit == [] ? <tr></tr> : this.props.statit.map(this.renderStat)}
+                    {this.props.statprime == [] ? <tr></tr> : this.props.statprime.map(this.renderStat)}
                     </tbody>
                 </Table>
             </div>
