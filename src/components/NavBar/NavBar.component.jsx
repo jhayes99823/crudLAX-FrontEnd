@@ -4,6 +4,7 @@ import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
 
 import styles from './styles.css';
 import { withRouter } from 'react-router-dom';
+import logic from '../../util/logic';
 
 class NavBar extends React.Component {
 
@@ -29,6 +30,7 @@ class NavBar extends React.Component {
                     <Nav.Link href={(loggedUser == null) ? "/" : ((loggedUser.Role == 'P') ? '/player-home' : '/coach-home')}>Home</Nav.Link>
                     <Nav.Link href={loggedUser == null? "/" : ((loggedUser.Role == 'P') ? '/player/profile' : '/coach-home')}>Profile</Nav.Link>
                     </Nav>
+                    <Navbar.Text> {(loggedUser == null) ? '' : 'Welcome, ' + logic.concatName(loggedUser.Fname, loggedUser.Lname + '   ')} </Navbar.Text>
                     <Button variant="light" type="button" onClick={this.logout}>Logout</Button>
                 </Navbar>
             </div>
