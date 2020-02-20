@@ -49,28 +49,6 @@ export default class CoachHomePage extends React.Component {
             console.log(err)
         })
 
-<<<<<<< HEAD
-        fetch(activityReq, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then((res) => res.json())
-        .then((result) => {
-            console.log('res from act call', result);
-            if (result.success == true) {
-                this.setState({
-                    activities: result.activities
-                })
-                localStorage.setItem('activities', JSON.stringify(result.activities));
-            }
-            console.log(result.activities)
-            console.log('acttest')
-        })
-        
-        
-
-=======
->>>>>>> cb1c6f71048af16bb971a7591907d962636cda50
       }
 
     

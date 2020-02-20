@@ -71,9 +71,6 @@ exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
 exports.concatName = concatName;
 exports.formatDateTime = formatDateTime;
-<<<<<<< HEAD
 exports.createPairList = createPairList;
-=======
 exports.calculateWin = calculateWin;
 exports.fixDateAndTime = fixDateAndTime;
->>>>>>> cb1c6f71048af16bb971a7591907d962636cda50

@@ -28,8 +28,6 @@ export default class GameDetailView extends React.Component {
                         <Container>
                             <LabelPage text='Game Stats' bcolor='grey' />
                                 <StatTableForGame TID = {this.TeamID} GID = {this.GameID}/>
-                                {console.log(this.TeamID)}
-                                {console.log(this.GameID)}
                         </Container>
                     </Modal.Body>
                 </Modal>
