@@ -17,6 +17,7 @@ export default class StatTableForGame extends React.Component {
 
     //
     renderStat(stat1, index) {
+        
         return (
             <tr key={stat1.id} >
                 <th>

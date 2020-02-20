@@ -25,16 +25,27 @@ function formatDateTime(datetime) {
 }
 
 function createPairList(teams, activities) {
-    const pairLinks = {};
+
+    let pairLinks = {};
     const pairs = []
-    teams.forEach(function(teams, id) {
+
+    teams.forEach(function(teams,id) {
         pairLinks.push({teamid: id})
+        activities.forEach(function(activities, id){
+            pairLinks[id].push({activities: id})
+        })
+        pairs.push(pairLinks);
+        pairLinks = {};
     })
-    activities.forEach(function(activities, id) {
-        pairLinks.push({activityid: id})
-    })
-    return pairLinks
-    //Make one object with each team id and game id
+    return pairs
+    // teams.forEach(function(teams, id) {
+    //     pairLinks.push({teamid: id})
+    // })
+    // activities.forEach(function(activities, id) {
+    //     pairLinks.push({activityid: id})
+    // })
+    // return pairLinks
+    // //Make one object with each team id and game id
 }
 
 exports.make_record = make_record;
