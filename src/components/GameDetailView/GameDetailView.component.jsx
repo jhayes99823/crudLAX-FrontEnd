@@ -10,9 +10,6 @@ export default class GameDetailView extends React.Component {
         console.log('yolas')
         this.TeamID = JSON.parse(localStorage.getItem('Teams'));
         this.GameID = JSON.parse(localStorage.getItem('Activities'));
-        console.log('yolo')
-        const res = logic.createPairList(this.TeamID, this.GameID)
-        console.log('mapping two lists', res)
     }
 
     
@@ -27,7 +24,6 @@ export default class GameDetailView extends React.Component {
                     <Modal.Body>
                         <Container>
                             <LabelPage text='Game Stats' bcolor='grey' />
-                                <StatTableForGame TID = {this.TeamID} GID = {this.GameID}/>
                         </Container>
                     </Modal.Body>
                 </Modal>

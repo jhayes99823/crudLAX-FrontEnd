@@ -152,6 +152,9 @@ class TeamMoreInfoPage extends React.Component {
                     Teams Assigned Games
                     <GameTable games={this.state.games}/>
                     <Button onClick={this.showGameModal}>Create A Game</Button>
+                    {/* create a new game table for stats 
+                        add a new td with a button for more 
+                        info to display stats*/}
                 </Container>
                 <br></br>
                 <br></br>
