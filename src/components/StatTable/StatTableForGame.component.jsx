@@ -71,7 +71,7 @@ export default class StatTableForGame extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {this.props.statit == [] ? <tr></tr> : this.props.statit.map(this.renderStat)}
+                    {this.props.statmap == [] ? <tr></tr> : this.props.statmap.map(this.renderStat)}
                     </tbody>
                 </Table>
             </div>
