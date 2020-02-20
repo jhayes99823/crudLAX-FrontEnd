@@ -25,19 +25,22 @@ function formatDateTime(datetime) {
 }
 
 function createPairList(teams, activities) {
-
-    let pairLinks = {};
-    const pairs = []
-
-    teams.forEach(function(teams,id) {
-        pairLinks.push({teamid: id})
-        activities.forEach(function(activities, id){
-            pairLinks[id].push({activities: id})
+    console.log('YUH')
+    if (teams != null && activities != null) {
+        let pairLinks = {};
+        const pairs = []
+    
+        teams.forEach(function(teams,id) {
+            pairLinks.push({teamid: id})
+            activities.forEach(function(activities, id){
+                pairLinks[id].push({activities: id})
+            })
+            pairs.push(pairLinks);
+            pairLinks = {};
         })
-        pairs.push(pairLinks);
-        pairLinks = {};
-    })
-    return pairs
+        return pairs
+    }
+    return [];
     // teams.forEach(function(teams, id) {
     //     pairLinks.push({teamid: id})
     // })
@@ -52,3 +55,4 @@ exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
 exports.concatName = concatName;
 exports.formatDateTime = formatDateTime;
+exports.createPairList = createPairList;

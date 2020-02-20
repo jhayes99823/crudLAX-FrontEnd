@@ -44,8 +44,11 @@ export default class CoachHomePage extends React.Component {
                     teams: result.teams,
                     userid: result.user[0].ID
                 });
-                localStorage.setItem('teams', JSON.stringify(result.teams));
+                console.log('coach home page res', result);
+                localStorage.setItem('Teams', JSON.stringify(result.teams));
             }
+            console.log(result.teams)
+            console.log('teatest')
         },
         (err) => {
             console.log(err)
@@ -62,9 +65,13 @@ export default class CoachHomePage extends React.Component {
                 this.setState({
                     activities: result.activities
                 })
+                localStorage.setItem('Activities', JSON.stringify(result.activities));
             }
-            localStorage.setItem('activities', JSON.stringify(result.activities));
+            console.log(result.activities)
+            console.log('acttest')
         })
+        
+        
 
       }
 

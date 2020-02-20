@@ -7,9 +7,10 @@ import logic from '../../util/logic'
 export default class GameDetailView extends React.Component {
     constructor(props) {
         super(props);
-        const TeamID = JSON.parse(localStorage.getItem('Teams'));
-        const GameID = JSON.parse(localStorage.getItem('Activities'));
-        const res = logic.createPairList(TeamID, GameID)
+        console.log('OUCH')
+        this.TeamID = JSON.parse(localStorage.getItem('Teams'));
+        this.GameID = JSON.parse(localStorage.getItem('Activities'));
+        const res = logic.createPairList(this.TeamID, this.GameID)
         console.log(res)
     }
 
@@ -26,6 +27,8 @@ export default class GameDetailView extends React.Component {
                         <Container>
                             <LabelPage text='Game Stats' bcolor='grey' />
                                 <StatTableForGame TID = {this.TeamID} GID = {this.GameID}/>
+                                {console.log(this.TeamID)}
+                                {console.log(this.GameID)}
                         </Container>
                     </Modal.Body>
                 </Modal>

@@ -75,6 +75,7 @@ export default class ActivityTable extends React.Component {
                     <tbody>
                         {this.props.activities == [] ? <tr></tr> : this.props.activities.map(this.renderActivity)}
                     </tbody>
+                    {console.log('Doot')}
                 </Table>
                 <GameDetailView activity={this.activityToDetail} show={this.state.showDetailModal} onHide={this.handleCloseModal} />
             </div>
