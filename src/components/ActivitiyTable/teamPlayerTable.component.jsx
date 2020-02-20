@@ -17,13 +17,7 @@ export default class TeamPlayerTable extends React.Component{
                         {team.CoachID }
                     </th>
                     <th>
-                        {team.Wins}  
-                    </th>
-                    <th>
-                        {team.Loses} 
-                    </th>
-                    <th>
-                        {team.Ties}
+                        {logic.make_record(team.Wins, team.Loses, team.Ties)}
                     </th>
                     <th>
                         {team.HomeTown}
@@ -53,9 +47,7 @@ export default class TeamPlayerTable extends React.Component{
                         <tr>
                             <th>Team Name</th>
                             <th>HeadCoach</th>
-                            <th> Wins</th>
-                            <th> Loses</th>
-                            <th> Ties</th>
+                            <th> Record</th>
                             <th>HomeTown</th>
                             <th>School</th>
                         </tr>

@@ -6,7 +6,6 @@ import CreateTeamModal from '../../../components/Team/CreateTeam.component';
 import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
 
 import qb from '../../../util/query-builder';
-import CreateActivityModal from '../../../components/Activity/CreateActivityModal.component';
 
 export default class CoachHomePage extends React.Component {
     constructor(props) {
@@ -22,16 +21,12 @@ export default class CoachHomePage extends React.Component {
 
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.handleShowModalAct = this.handleShowModalAct.bind(this);
-        this.handleCloseModalAct = this.handleCloseModalAct.bind(this);
     }
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
        
         const usernameReq = qb.queryBuilder('api/teams',  { username: loggedUser.Username }, 'GET');       
-
-        const activityReq = qb.queryBuilder('api/activity', { username: loggedUser.Username }, 'GET');
 
         fetch(usernameReq, {
             headers: {
@@ -54,6 +49,7 @@ export default class CoachHomePage extends React.Component {
             console.log(err)
         })
 
+<<<<<<< HEAD
         fetch(activityReq, {
             headers: {
                 'Content-Type': 'application/json'
@@ -73,6 +69,8 @@ export default class CoachHomePage extends React.Component {
         
         
 
+=======
+>>>>>>> cb1c6f71048af16bb971a7591907d962636cda50
       }
 
     
@@ -84,13 +82,6 @@ export default class CoachHomePage extends React.Component {
 		this.setState({ showModal: false });
     }
     
-    handleShowModalAct() {
-	    this.setState({ showActModal: true });
-    }
-    
-	handleCloseModalAct() {
-		this.setState({ showActModal: false });
-	}
 
     render() {
         return( 
@@ -115,7 +106,6 @@ export default class CoachHomePage extends React.Component {
                     {console.log(this.state.activities)}
                     <ActivityTable activities={this.state.activities}/>
                     <Button onClick={this.handleShowModalAct}>Create Activity</Button>
-                    <CreateActivityModal coachid={this.state.userid} teams={this.state.teams} show={this.state.showActModal} onHide={this.handleCloseModalAct} />
                 </Container>
             </div>
         )

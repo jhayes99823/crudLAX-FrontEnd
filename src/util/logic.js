@@ -55,8 +55,25 @@ function createPairList(teams, activities) {
     // //Make one object with each team id and game id
 }
 
+function calculateWin(yourScore, oppScore) {
+    if (yourScore == oppScore) {
+        return 2;
+    }
+    return (yourScore > oppScore) ? 1 : 0;
+}
+
+
+function fixDateAndTime(date, time) {
+    return date + ' ' + time;
+}
+
 exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
 exports.concatName = concatName;
 exports.formatDateTime = formatDateTime;
+<<<<<<< HEAD
 exports.createPairList = createPairList;
+=======
+exports.calculateWin = calculateWin;
+exports.fixDateAndTime = fixDateAndTime;
+>>>>>>> cb1c6f71048af16bb971a7591907d962636cda50
