@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import logic from '../../util/logic';
 
 
-export default class StatTableForGame extends React.Component {
+export default class StatTableForAverage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,36 +16,39 @@ export default class StatTableForGame extends React.Component {
 
 
     //
-    renderStat(stat1, index) {
+    renderStat(stat, index) {
         
         return (
-            <tr key={stat1.id} >
+            <tr key={stat.id} >
                 <th>
-                    {stat1.LName}
+                    {stat.LName}
                 </th>
                 <th>
-                    {stat1.Fname}
+                    {stat.FName}
                 </th>
                 <th>
-                    {stat1.Goals}
+                    {stat.Position}
                 </th>
                 <th>
-                    {stat1.Assists}
+                    {stat.Goals}
                 </th>
                 <th>
-                    {stat1.ForcedTurnOver}
+                    {stat.Assists}
                 </th>
                 <th>
-                    {stat1.Saves}
+                    {stat.ForcedTurnover}
                 </th>
                 <th>
-                    {stat1.GroundBall}
+                    {stat.Saves}
                 </th>
                 <th>
-                    {stat1.faceOffPercent}
+                    {stat.GroundBall}
                 </th>
                 <th>
-                    {stat1.passPercent}
+                    {stat.FaceOffPercent}
+                </th>
+                <th>
+                    {stat.PassPercent}
                 </th>
                 
             </tr>
@@ -60,6 +63,7 @@ export default class StatTableForGame extends React.Component {
                         <tr>
                             <th>Last Name</th>
                             <th>First Name</th>
+                            <th>Position</th>
                             <th>Goals</th>
                             <th>Assists</th>
                             <th>Forced Turnover</th>
