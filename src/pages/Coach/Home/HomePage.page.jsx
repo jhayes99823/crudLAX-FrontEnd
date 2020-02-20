@@ -6,7 +6,6 @@ import CreateTeamModal from '../../../components/Team/CreateTeam.component';
 import ActivityTable from '../../../components/ActivitiyTable/activityTable.component';
 
 import qb from '../../../util/query-builder';
-import CreateActivityModal from '../../../components/Activity/CreateActivityModal.component';
 
 export default class CoachHomePage extends React.Component {
     constructor(props) {
@@ -22,16 +21,12 @@ export default class CoachHomePage extends React.Component {
 
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.handleShowModalAct = this.handleShowModalAct.bind(this);
-        this.handleCloseModalAct = this.handleCloseModalAct.bind(this);
     }
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
        
         const usernameReq = qb.queryBuilder('api/teams',  { username: loggedUser.Username }, 'GET');       
-
-        const activityReq = qb.queryBuilder('api/activity', { username: loggedUser.Username }, 'GET');
 
         fetch(usernameReq, {
             headers: {
@@ -51,21 +46,6 @@ export default class CoachHomePage extends React.Component {
             console.log(err)
         })
 
-        fetch(activityReq, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then((res) => res.json())
-        .then((result) => {
-            console.log('res from act call', result);
-            if (result.success == true) {
-                this.setState({
-                    activities: result.activities
-                })
-            }
-            localStorage.setItem('activities', JSON.stringify(result.activities));
-        })
-
       }
 
     
@@ -77,13 +57,6 @@ export default class CoachHomePage extends React.Component {
 		this.setState({ showModal: false });
     }
     
-    handleShowModalAct() {
-	    this.setState({ showActModal: true });
-    }
-    
-	handleCloseModalAct() {
-		this.setState({ showActModal: false });
-	}
 
     render() {
         return( 
@@ -108,7 +81,6 @@ export default class CoachHomePage extends React.Component {
                     {console.log(this.state.activities)}
                     <ActivityTable activities={this.state.activities}/>
                     <Button onClick={this.handleShowModalAct}>Create Activity</Button>
-                    <CreateActivityModal coachid={this.state.userid} teams={this.state.teams} show={this.state.showActModal} onHide={this.handleCloseModalAct} />
                 </Container>
             </div>
         )

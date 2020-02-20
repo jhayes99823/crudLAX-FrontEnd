@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import logic from '../../util/logic';
 
 
 export default class GameTable extends React.Component {
@@ -14,10 +15,10 @@ export default class GameTable extends React.Component {
                     {game.Name}
                 </th>
                 <th>
-                    {game.StartTime}
+                    {logic.formatDateTime(game.StartTime)}
                 </th>
                 <th>
-                    {game.EndTime}
+                    {logic.formatDateTime(game.EndTime)}
                 </th>
                 <th>
                     {game.Location}

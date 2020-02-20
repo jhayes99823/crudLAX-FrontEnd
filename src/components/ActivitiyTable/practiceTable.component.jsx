@@ -17,10 +17,10 @@ export default class PracticeTable extends React.Component {
                     {practice.Name}
                 </th>
                 <th>
-                    {practice.StartTime}
+                    {logic.formatDateTime(practice.StartTime)}
                 </th>
                 <th>
-                    {practice.EndTime}
+                    {logic.formatDateTime(practice.EndTime)}
                 </th>
                 <th>
                    {practice.Location} 

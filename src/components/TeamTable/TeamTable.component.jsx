@@ -134,7 +134,6 @@ class TeamTable extends React.Component {
         return (
             <div>
                 <Alert show={this.state.showDeleteSuccess} onClose={this.closeDeleteAlert} dismissable variant='success'>Team Deleted Successfully!</Alert>
-                <Alert show={this.state.showAlert} onClose={this.closeAlert} dismissable variant='danger'>{ ErrorMapper(this.state.ErrorCode) }</Alert>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
