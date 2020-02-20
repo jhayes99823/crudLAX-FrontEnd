@@ -25,18 +25,22 @@ function formatDateTime(datetime) {
 }
 
 function createPairList(teams, activities) {
-    console.log('YUH')
     if (teams != null && activities != null) {
-        let pairLinks = {};
-        const pairs = []
+        let pairLinks = new Object();
+        pairLinks.teamid = -1;
+        pairLinks.gameid = -1;
+        const pairs = [];
     
-        teams.forEach(function(teams,id) {
-            pairLinks.push({teamid: id})
-            activities.forEach(function(activities, id){
-                pairLinks[id].push({activities: id})
+        teams.forEach(function(teams,tid) {
+            pairLinks.teamid = teams.ID
+            activities.forEach(function(activities, aid){
+                pairLinks.gameid = activities.id
             })
             pairs.push(pairLinks);
-            pairLinks = {};
+            pairLinks = new Object();
+            pairLinks.teamid = -1;
+            pairLinks.gameid = -1;
+
         })
         return pairs
     }

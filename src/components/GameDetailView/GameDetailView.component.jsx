@@ -7,11 +7,12 @@ import logic from '../../util/logic'
 export default class GameDetailView extends React.Component {
     constructor(props) {
         super(props);
-        console.log('OUCH')
+        console.log('yolas')
         this.TeamID = JSON.parse(localStorage.getItem('Teams'));
         this.GameID = JSON.parse(localStorage.getItem('Activities'));
+        console.log('yolo')
         const res = logic.createPairList(this.TeamID, this.GameID)
-        console.log(res)
+        console.log('mapping two lists', res)
     }
 
     

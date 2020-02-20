@@ -65,7 +65,7 @@ export default class CoachHomePage extends React.Component {
                 this.setState({
                     activities: result.activities
                 })
-                localStorage.setItem('Activities', JSON.stringify(result.activities));
+                localStorage.setItem('activities', JSON.stringify(result.activities));
             }
             console.log(result.activities)
             console.log('acttest')

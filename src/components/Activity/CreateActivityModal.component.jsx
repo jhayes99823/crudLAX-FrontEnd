@@ -32,13 +32,14 @@ export default class CreateActivityModal extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        const actTeam = logic.findObjectByKey(this.props.teams, 'TeamName', this.state.teamact);
-        console.log(actTeam.TID);
+        // const actTeam = logic.findObjectByKey(this.props.teams, 'TeamName', this.state.teamact);
+        // console.log('act team', actTeam);
+        // console.log(actTeam.TID);
         const newAct = {
             name: this.state.name,
             location: this.state.location,
             coachID: this.props.coachid,
-            teamID: actTeam.TID,
+            teamID: 1059,
             starttime: this.fixDateAndTime(this.state.startdate, this.state.starttime),
             endtime: this.fixDateAndTime(this.state.enddate, this.state.endtime),
             win: 1,
