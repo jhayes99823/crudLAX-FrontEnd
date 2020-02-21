@@ -25,16 +25,34 @@ function formatDateTime(datetime) {
 }
 
 function createPairList(teams, activities) {
-    const pairLinks = {};
-    const pairs = []
-    teams.forEach(function(teams, id) {
-        pairLinks.push({teamid: id})
-    })
-    activities.forEach(function(activities, id) {
-        pairLinks.push({activityid: id})
-    })
-    return pairLinks
-    //Make one object with each team id and game id
+    if (teams != null && activities != null) {
+        let pairLinks = new Object();
+        pairLinks.teamid = -1;
+        pairLinks.gameid = -1;
+        const pairs = [];
+    
+        teams.forEach(function(teams,tid) {
+            pairLinks.teamid = teams.ID
+            activities.forEach(function(activities, aid){
+                pairLinks.gameid = activities.id
+            })
+            pairs.push(pairLinks);
+            pairLinks = new Object();
+            pairLinks.teamid = -1;
+            pairLinks.gameid = -1;
+
+        })
+        return pairs
+    }
+    return [];
+    // teams.forEach(function(teams, id) {
+    //     pairLinks.push({teamid: id})
+    // })
+    // activities.forEach(function(activities, id) {
+    //     pairLinks.push({activityid: id})
+    // })
+    // return pairLinks
+    // //Make one object with each team id and game id
 }
 
 function calculateWin(yourScore, oppScore) {
@@ -53,5 +71,6 @@ exports.make_record = make_record;
 exports.findObjectByKey = findObjectByKey;
 exports.concatName = concatName;
 exports.formatDateTime = formatDateTime;
+exports.createPairList = createPairList;
 exports.calculateWin = calculateWin;
 exports.fixDateAndTime = fixDateAndTime;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { queryBuilder } from '../../../util/query-builder';
+import {queryBuilder} from '../../../util/query-builder';
 import RosterTable from '../../../components/Roster/RosterTable.component';
 import { Button, Container } from 'react-bootstrap';
 import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.component';
@@ -9,6 +9,8 @@ import PracticeTable from '../../../components/ActivitiyTable/practiceTable.comp
 import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
 import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
+import StatTable from '../../../components/StatTable/StatTableForAverage.component';
+
 
 
 class TeamMoreInfoPage extends React.Component {
@@ -19,6 +21,7 @@ class TeamMoreInfoPage extends React.Component {
             players: [],
             practices: [],
             games: [],
+            stats:[],
             addPlayer: false,
             showGameModal: false,
             showPracticeModal: false,
@@ -111,6 +114,21 @@ class TeamMoreInfoPage extends React.Component {
                 })
             }
         })
+
+        const statReq = queryBuilder('/api/stat/viewTeamAverageStats', { TID: this.TID}, 'GET');
+        fetch(statReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log(result.stats);
+            if(result.success==true){
+                this.setState({
+                    stats: result.stats,
+                })
+            }
+        })
     }
 
     moveBack() {
@@ -134,6 +152,9 @@ class TeamMoreInfoPage extends React.Component {
                     Teams Assigned Games
                     <GameTable games={this.state.games}/>
                     <Button onClick={this.showGameModal}>Create A Game</Button>
+                    {/* create a new game table for stats 
+                        add a new td with a button for more 
+                        info to display stats*/}
                 </Container>
                 <br></br>
                 <br></br>
@@ -146,7 +167,10 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                {/* //Insert Team Average View Here */}
+                <Container>
+                    Team Average Stats
+                <StatTable statprime={this.state.stats} />
+                </Container>
                 <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
                 <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
             </div>

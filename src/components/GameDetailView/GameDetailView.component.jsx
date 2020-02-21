@@ -2,12 +2,14 @@ import React from 'react';
 import { Modal, Container } from 'react-bootstrap';
 import LabelPage from '../Label/label.component';
 import StatTableForGame from '../StatTable/StatTableForGame.component';
+import logic from '../../util/logic'
 
 export default class GameDetailView extends React.Component {
     constructor(props) {
         super(props);
-        const TeamID = JSON.parse(localStorage.getItem(''));
-        const GameID = JSON.parse(localStorage.getItem('loggedIn'));
+        console.log('yolas')
+        this.TeamID = JSON.parse(localStorage.getItem('Teams'));
+        this.GameID = JSON.parse(localStorage.getItem('Activities'));
     }
 
     
@@ -15,14 +17,13 @@ export default class GameDetailView extends React.Component {
     render() {
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.props.onHide} centered>
+                <Modal size = 'lg' show={this.props.show} onHide={this.props.onHide} centered>
                     <Modal.Header centered>
                         Game Detail View
                     </Modal.Header>
                     <Modal.Body>
                         <Container>
-                            <LabelPage text='Roster' bcolor='grey' />
-                                <StatTableForGame TID = {this.TeamID} GID = {this.GameID}/>
+                            <LabelPage text='Game Stats' bcolor='grey' />
                         </Container>
                     </Modal.Body>
                 </Modal>
