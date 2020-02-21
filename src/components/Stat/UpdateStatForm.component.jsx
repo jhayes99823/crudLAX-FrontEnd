@@ -123,8 +123,13 @@ export default class CreateStatForm extends React.Component {
                         </Form.Row>
     
                         <Button variant="primary" type="submit">
-                            Enter Stat
+                            Update Stat
                         </Button>
+
+                        <Button variant="primary" type="submit">
+                            Delete Stat
+                        </Button>
+
                     </Form>
                 </Container>
             </div>
