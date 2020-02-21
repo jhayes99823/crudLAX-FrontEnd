@@ -1,3 +1,4 @@
+import React from 'react';
 var dateFormat = require('dateformat');
 
 
@@ -53,6 +54,12 @@ function createPairList(teams, activities) {
     // })
     // return pairLinks
     // //Make one object with each team id and game id
+}
+
+function creatOpponentArray({ games }) {
+    return games.map(games => (
+        <h1>{games.opponent}</h1>
+    ));
 }
 
 function calculateWin(yourScore, oppScore) {

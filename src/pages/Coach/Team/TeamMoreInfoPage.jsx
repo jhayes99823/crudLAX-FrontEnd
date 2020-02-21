@@ -6,7 +6,7 @@ import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.com
 import LabelPage from '../../../components/Label/label.component';
 import { withRouter } from 'react-router-dom';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
-import GameTable from '../../../components/ActivitiyTable/gameTable.component';
+import GameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
 import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
 import StatTable from '../../../components/StatTable/StatTableForAverage.component';
@@ -40,6 +40,7 @@ class TeamMoreInfoPage extends React.Component {
         this.closePracticeModal = this.closePracticeModal.bind(this);
 
         this.moveBack = this.moveBack.bind(this);
+        this.createStat = this.createStat.bind(this);
     }
 
     showGameModal() {
@@ -136,6 +137,11 @@ class TeamMoreInfoPage extends React.Component {
         this.props.history.push('/coach-home');
     }
 
+    createStat() {
+        this.state.games
+        this.props.history.push('/coach/create-stat');
+    }
+
     render() {
         return (
             <div>
@@ -150,7 +156,7 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <Container>
                     Teams Assigned Games
-                    <GameTable games={this.state.games}/>
+                    <GameTableWithMoreInfo games={this.state.games}/>
                     <Button onClick={this.showGameModal}>Create A Game</Button>
                     {/* create a new game table for stats 
                         add a new td with a button for more 
@@ -169,8 +175,14 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <Container>
                     Team Average Stats
-                <StatTable statprime={this.state.stats} />
+                    <StatTable statprime={this.state.stats} />
                 </Container>
+                <br></br>
+                <br></br>
+                <Container>
+                    <Button onClick={this.createStat}>Create Stat</Button>
+                </Container>
+
                 <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
                 <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
             </div>
