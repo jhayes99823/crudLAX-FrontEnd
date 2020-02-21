@@ -40,6 +40,7 @@ class TeamMoreInfoPage extends React.Component {
         this.closePracticeModal = this.closePracticeModal.bind(this);
 
         this.moveBack = this.moveBack.bind(this);
+        this.createStat = this.createStat.bind(this);
     }
 
     showGameModal() {
@@ -137,7 +138,7 @@ class TeamMoreInfoPage extends React.Component {
     }
 
     createStat() {
-        console.log(this.props.games)
+        this.state.games
         this.props.history.push('/coach/create-stat');
     }
 
@@ -179,9 +180,9 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <br></br>
                 <Container>
-                    <Button onClick={this.createStat()}>Create Stat</Button>
+                    <Button onClick={this.createStat}>Create Stat</Button>
                 </Container>
-                
+
                 <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
                 <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
             </div>

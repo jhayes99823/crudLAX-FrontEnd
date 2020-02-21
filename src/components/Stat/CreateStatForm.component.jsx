@@ -1,13 +1,14 @@
 import React from 'react';
 import { Container, Form, Button, Col, Modal } from 'react-bootstrap';
-import logic from '../../../util/logic'
+import { withRouter } from 'react-router-dom';
 
 export default class CreateStatForm extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            game: '',
+            PID: '',
+            GID: '',
             goals: '',
             assists: '',
             saves: '',
@@ -20,34 +21,34 @@ export default class CreateStatForm extends React.Component {
 
         }
 
-        var arr = createOpponentArray(this.games)
+        console.log('mounting create stat form')
+
+        // const arr = createOpponentArray(this.games)
 
         this.setValue = this.setValue.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
 
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    moveBack() {
-        this.props.history.push('/coach/team-info');
-    }
-
     onSubmit(event) {
         event.preventDefault();
 
         const newStat = {
-            username: this.state.username,
-            game: this.state.game,
+            PID: this.state.PID,
+            GID: this.state.GID,
             goals: this.state.goals,
             assists: this.state.assists,
             saves: this.state.saves,
-            groundballs: this.state.groundballs,
-            faceoffsuccess: this.state.faceoffsuccess,
-            faceofftotal: this.state.faceofftotal,
+            forcedTurnover: this.state.forcedTurnover,
+            groundBall: this.state.groundballs,
+            faceoffSuccess: this.state.faceoffsuccess,
+            totalFaceoff: this.state.faceofftotal,
             passSuccess: this.state.passSuccess,
-            passtotal: this.state.passtotal
+            totalPass: this.state.passtotal
         }
 
         fetch('/api/stat/create', {
@@ -80,13 +81,14 @@ export default class CreateStatForm extends React.Component {
                         <Form onSubmit={this.onSubmit}>
                             <Form.Group></Form.Group>
                             <Form.Group controlId="formUsername">
-                                <Form.Control name="username" type="text" placeholder="Enter Player Username" onChange={this.setValue} />
+                            <Form.Label>Enter PlayerID</Form.Label>
+                                <Form.Control name="PID" type="text" placeholder="Enter Player Username" onChange={this.setValue} />
                             </Form.Group>
 
                             <Form.Group controlId="Form.ControlSelect">
-                            <Form.Label>Select Game</Form.Label>
-                            <Form.Control name="game" as="select" onChange={this.setValue}>
-                                {arr.map((opponents) => <option>{arr}</option>)}
+                            <Form.Label>Enter GameID</Form.Label>
+                            <Form.Control name="GID" as="text" placeholder="Enter A Game ID" onChange={this.setValue}>
+                                
                             </Form.Control>
                             </Form.Group>
 
@@ -177,4 +179,3 @@ export default class CreateStatForm extends React.Component {
         )
     }
 }
-
