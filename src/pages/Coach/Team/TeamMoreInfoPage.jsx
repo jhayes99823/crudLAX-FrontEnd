@@ -6,10 +6,11 @@ import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.com
 import LabelPage from '../../../components/Label/label.component';
 import { withRouter } from 'react-router-dom';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
-import GameTable from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
+import gameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
 import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
 import StatTable from '../../../components/StatTable/StatTableForAverage.component';
+import GameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 
 
 
@@ -150,7 +151,7 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <Container>
                     Teams Assigned Games
-                    <GameTable games={this.state.games}/>
+                    <GameTableWithMoreInfo games={this.state.games}/>
                     <Button onClick={this.showGameModal}>Create A Game</Button>
                     {/* create a new game table for stats 
                         add a new td with a button for more 

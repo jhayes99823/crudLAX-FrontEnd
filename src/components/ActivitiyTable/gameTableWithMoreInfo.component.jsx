@@ -8,8 +8,6 @@ import { Button } from 'react-bootstrap';
 export default class GameTableWithMoreInfo extends React.Component {
     constructor(props) {
         super(props);
-        // this.TID = JSON.parse(localStorage.getItem('moreInfoTeam'));
-        // this.GID = game.ID
 
         this.moreInfoStatPage = this.moreInfoStatPage.bind(this)
         this.renderGame = this.renderGame.bind(this)
