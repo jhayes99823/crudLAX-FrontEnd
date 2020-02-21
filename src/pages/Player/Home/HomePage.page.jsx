@@ -13,6 +13,7 @@ import GameTable from '../../../components/ActivitiyTable/gameTable.component';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
 import TeamPlayerTable from '../../../components/ActivitiyTable/teamPlayerTable.component';
 import StatTable from '../../../components/StatTable/StatTable.component';
+import StatTableForTeam from '../../../components/StatTable/StatTableForAverage.component'
 import UpdatePlayerProfile from '../../../components/ActivitiyTable/updatePlayerProfile.component';
 import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.component';
 
@@ -26,7 +27,8 @@ export default class PlayerHomePage extends React.Component {
         this.playerProfile = {};
         this.state = {
             games: [],
-            stats:[],
+            stats: [],
+            statsteam: [],
             userid: [], 
             practices: [], 
             teams: [], 
@@ -114,6 +116,21 @@ export default class PlayerHomePage extends React.Component {
                 })
             }
         })
+
+        const statTeamReq = qb.queryBuilder('/api/stat/viewTeamAverageStat', { PID: loggedUser.ID }, 'GET');
+        fetch(statTeamReq, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => res.json())
+        .then((result) => {
+            console.log(result.statsteam);
+            if(result.success==true){
+                this.setState({
+                    stats: result.statsteam,
+                })
+            }
+        })
     
     
     
@@ -141,6 +158,11 @@ export default class PlayerHomePage extends React.Component {
                     Your Stats
                 <StatTable statit={this.state.stats} />
                 </Container>
+                <br></br>
+                {/* <Container>
+                    Your Teams Stats
+                <StatTableForTeam statprime={this.state.statsteam} />
+                </Container> */}
                 <br></br>
                 <Container>
                      Your Practices 
