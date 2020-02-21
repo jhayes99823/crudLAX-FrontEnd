@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form, Button, Col, Modal } from 'react-bootstrap';
+import { FaTrash, FaPen } from 'react-icons/fa';
 
 export default class CreateStatForm extends React.Component {
     constructor(props) {
@@ -42,7 +43,7 @@ export default class CreateStatForm extends React.Component {
             passtotal: this.state.passtotal
         }
 
-        fetch('/api/stat/create', {
+        fetch('/api/stat/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -159,8 +160,13 @@ export default class CreateStatForm extends React.Component {
                             </Form.Row>
         
                             <Button variant="primary" type="submit">
-                                Create Stat For Player
+                                Update Stat For Player
                             </Button>
+
+                            <Button variant="" type="">
+                                <FaTrash />
+                            </Button>
+
                         </Form>
                     </Container>
                 </Modal.Body>
