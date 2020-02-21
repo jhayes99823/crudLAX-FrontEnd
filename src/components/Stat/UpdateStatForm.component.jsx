@@ -15,10 +15,12 @@ export default class CreateStatForm extends React.Component {
             faceoffsuccess: '',
             faceofftotal: '',
             passSuccess: '',
-            passtotal: ''
+            passtotal: '',
+            games: []
 
         }
-        const trash = false;
+        
+        this.loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
 
         this.setValue = this.setValue.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -80,7 +82,7 @@ export default class CreateStatForm extends React.Component {
                             <Form.Group controlId="Form.ControlSelect">
                             <Form.Label>Select Game</Form.Label>
                             <Form.Control name="game" as="select" onChange={this.setValue}>
-                            {this.props.game == [] ? <tr></tr> : this.props.game.map(this.renderGame)}
+                                {props.map((opponent) => <option>{opponent}</option>)}
                             </Form.Control>
                             </Form.Group>
 
@@ -164,7 +166,7 @@ export default class CreateStatForm extends React.Component {
                                 Update Stat For Player
                             </Button>
 
-                            <Button onClick={this.deleteStat(loggedUser.ID)}>
+                            <Button onClick={this.deleteStat(this.username)}>
                                 <FaTrash />
                             </Button>
 

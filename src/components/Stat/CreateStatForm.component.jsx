@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form, Button, Col, Modal } from 'react-bootstrap';
+import logic from '../../../util/logic'
 
 export default class CreateStatForm extends React.Component {
     constructor(props) {
@@ -14,9 +15,12 @@ export default class CreateStatForm extends React.Component {
             faceoffsuccess: '',
             faceofftotal: '',
             passSuccess: '',
-            passtotal: ''
+            passtotal: '',
+            games: []
 
         }
+
+        var arr = createOpponentArray(this.games)
 
         this.setValue = this.setValue.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,6 +28,10 @@ export default class CreateStatForm extends React.Component {
 
     setValue(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    moveBack() {
+        this.props.history.push('/coach/team-info');
     }
 
     onSubmit(event) {
@@ -78,7 +86,7 @@ export default class CreateStatForm extends React.Component {
                             <Form.Group controlId="Form.ControlSelect">
                             <Form.Label>Select Game</Form.Label>
                             <Form.Control name="game" as="select" onChange={this.setValue}>
-                            {this.props.game == [] ? <tr></tr> : this.props.game.map(this.renderGame)}
+                                {arr.map((opponents) => <option>{arr}</option>)}
                             </Form.Control>
                             </Form.Group>
 

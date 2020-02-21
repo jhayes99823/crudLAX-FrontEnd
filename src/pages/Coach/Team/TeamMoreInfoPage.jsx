@@ -136,6 +136,11 @@ class TeamMoreInfoPage extends React.Component {
         this.props.history.push('/coach-home');
     }
 
+    createStat() {
+        console.log(this.props.games)
+        this.props.history.push('/coach/create-stat');
+    }
+
     render() {
         return (
             <div>
@@ -171,6 +176,12 @@ class TeamMoreInfoPage extends React.Component {
                     Team Average Stats
                     <StatTable statprime={this.state.stats} />
                 </Container>
+                <br></br>
+                <br></br>
+                <Container>
+                    <Button onClick={this.createStat()}>Create Stat</Button>
+                </Container>
+                
                 <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
                 <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
             </div>
