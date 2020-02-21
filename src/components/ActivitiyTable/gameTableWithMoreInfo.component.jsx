@@ -1,11 +1,22 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import logic from '../../util/logic';
+import { Button } from 'react-bootstrap';
 
 
-export default class GameTable extends React.Component {
+
+export default class GameTableWithMoreInfo extends React.Component {
     constructor(props) {
         super(props);
+        // this.TID = JSON.parse(localStorage.getItem('moreInfoTeam'));
+        // this.GID = game.ID
+
+        this.moreInfoStatPage = this.moreInfoStatPage.bind(this)
+        this.renderGame = this.renderGame.bind(this)
+    }
+
+    moreInfoStatPage(){
+        
     }
 
     renderGame(game, index) {
@@ -36,7 +47,7 @@ export default class GameTable extends React.Component {
                     {game.OpponentName}
                 </th>
                 <th>
-                    ({ row }) => (<button onClick={(e) => this.handleButtonClick(e, row)}>More Info</button>)
+                    <Button onClick={this.moreInfoStatPage()}>More Info</Button>
                 </th>
             </tr>
         )
@@ -61,7 +72,7 @@ export default class GameTable extends React.Component {
                             <th>Score</th>
                             <th>OpponentScore</th>
                             <th>OpponentName</th>
-                            <th></th>
+                            <th>More Info</th>
                         </tr>
                     </thead>
                     <tbody>

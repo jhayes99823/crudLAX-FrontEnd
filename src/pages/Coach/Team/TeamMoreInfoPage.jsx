@@ -6,7 +6,7 @@ import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.com
 import LabelPage from '../../../components/Label/label.component';
 import { withRouter } from 'react-router-dom';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
-import GameTable from '../../../components/ActivitiyTable/gameTable.component';
+import GameTable from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
 import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
 import StatTable from '../../../components/StatTable/StatTableForAverage.component';
