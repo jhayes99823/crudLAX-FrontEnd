@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import logic from '../../util/logic';
+
 export default class TeamPlayerTable extends React.Component{
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ export default class TeamPlayerTable extends React.Component{
                         {team.TeamName}
                     </th>
                     <th>
-                        {team.CoachID }
+                        {logic.concatName(team.Fname, team.Lname )}
                     </th>
                     <th>
                         {logic.make_record(team.Wins, team.Loses, team.Ties)}
