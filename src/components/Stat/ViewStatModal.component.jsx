@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import queryBuilder from '../../util/query-builder';
 import StatGameTable from '../StatTable/StatTableForGame.component';
 
 export default class ViewTeamModal extends React.Component {
