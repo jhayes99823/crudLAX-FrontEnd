@@ -24,7 +24,7 @@ class TeamTable extends React.Component {
         this.renderTeam = this.renderTeam.bind(this);
         this.deleteTeam = this.deleteTeam.bind(this);
         this.moreInfoTeamPage = this.moreInfoTeamPage.bind(this);
-        this.updateCell = this.updateCell.bind(this); // make sure to add to modal
+        this.updateCell = this.updateCell.bind(this); 
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.showAlert = this.showAlert.bind(this);
@@ -96,13 +96,15 @@ class TeamTable extends React.Component {
 
     renderTeam(team, index) {
         console.log('team in render team', team);
+        const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));
+        console.log('logged user in team table', loggedUser)
         return (
             <tr key={team.TID} onDoubleClick={this.updateCell(team.TID)}>
                 <th>
                     {team.TeamName}
                 </th>
                 <th>
-                   { team.TeamName}
+                   {logic.concatName(loggedUser.Fname, loggedUser.Lname) }
                 </th>
                 <th>
                     {logic.make_record(team.Wins, team.Loses, team.Ties)}

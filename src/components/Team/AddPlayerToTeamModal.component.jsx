@@ -36,15 +36,12 @@ export default class AddPlayerToRoster extends React.Component {
             body: JSON.stringify({ player: this.state })
         }).then((res) => res.json())
         .then((result) => {
-                console.log(result);
+                console.log('add player to team', result);
                 if (result.success == true) {
                     window.location.reload();
                 }
                 else {
-                    this.setState({
-                        ErrorCode: result.ErrorCode
-                    });
-                    this.showAlert();
+                    alert(util.ErrorMapper(result.ErrorCode))
                 }
         })
     }
