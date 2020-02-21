@@ -14,7 +14,7 @@ class NavBar extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
-    logout(loggedUser) {
+    logout() {
         localStorage.removeItem('loggedIn');
         this.props.history.push('/');
     }
