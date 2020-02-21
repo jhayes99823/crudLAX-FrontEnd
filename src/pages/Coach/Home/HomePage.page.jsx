@@ -18,7 +18,18 @@ export default class CoachHomePage extends React.Component {
             showActModal: false,
             userid: null,
         }
+
+        this.handleShowModal = this.handleShowModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
+
+    handleShowModal() {
+	    this.setState({ showModal: true });
+    }
+    
+	handleCloseModal() {
+		this.setState({ showModal: false });
+	}
 
     componentDidMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedIn'));

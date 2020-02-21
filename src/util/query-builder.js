@@ -14,15 +14,15 @@ function queryBuilder(url, params, method) {
 function ErrorMapper(val) {
     switch(val) {
         case -1:
-            return 'Invalid PlayerID';
+            return 'Invalid Player Given';
         case -2:
-            return 'Invalid TeamID';
+            return 'Invalid Team Given';
         case -3:
-            return 'Invalid CoachID';
+            return 'Invalid Coach Given';
         case -4:
             return 'Player Already On Roster';
         case -5:
-            return 'Invalid RosterID';
+            return 'Invalid Roster Given';
         case -6:
             return 'Username Already Exists';
         case -7:
@@ -41,6 +41,8 @@ function ErrorMapper(val) {
             return 'Invalid Combo of Username and Password';
         case -14:
             return 'Invalid Combo of Username and Password';
+        case -15:
+            return 'Please Enter Only Lowercase, Uppercase, and Numbers';
     }
 }
 
