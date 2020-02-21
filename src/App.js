@@ -14,6 +14,7 @@ import TeamMoreInfoPage from './pages/Coach/Team/TeamMoreInfoPage';
 import UpdatePlayerProfile from './components/ActivitiyTable/updatePlayerProfile.component';
 import GameMoreInfoPage from './pages/Coach/Stats/GameMoreInfoPage.page';
 import CreateStatForm from './components/Stat/CreateStatForm.component';
+import UpdateStatForm from './components/Stat/UpdateStatForm.component';
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class App extends Component {
                 <Route path="/coach/team-info" component={TeamMoreInfoPage} /> 
                 <Route path="/coach/game-info" component={GameMoreInfoPage} />
                 <Route path="/player/profile" component={UpdatePlayerProfile} />
-                <Route path="/coach/create-stat" component={CreateStatForm}/>  
+                <Route path="/coach/create-stat" component={CreateStatForm}/> 
+                <Route path="/coach/update-stat" component={UpdateStatForm}/> 
               </Switch>
       </div>
     );
