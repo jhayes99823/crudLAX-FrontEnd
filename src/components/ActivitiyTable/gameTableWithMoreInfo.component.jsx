@@ -2,6 +2,8 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import logic from '../../util/logic';
 import { Button } from 'react-bootstrap';
+import {queryBuilder} from '../../util/query-builder.js';
+import StatGameTable from '../../../components/StatTable/StatTableForAverage.component';
 
 
 
@@ -9,12 +11,29 @@ export default class GameTableWithMoreInfo extends React.Component {
     constructor(props) {
         super(props);
 
-        this.moreInfoStatPage = this.moreInfoStatPage.bind(this)
+        this.state = {
+            stats: [],
+            showStatModal: false
+        }
+
+        this.showStatModal = this.showStatModal.bind(this)
+        this.showOnClickStatModal = this.showOnClickStatModal.bind(this)
+        this.closeStatModal = this.closeStatModal.bind(this)
+
         this.renderGame = this.renderGame.bind(this)
     }
 
-    moreInfoStatPage(){
-        
+    showStatModal() {
+        this.setState({ showStatModal: true });
+    }
+
+    showOnClickStatModal() {
+        localStorage.setItem('GID', id)
+        this.setState({ showStatModal: true });
+    }
+    
+	closeStatModal() {
+		this.setState({ showStatModal: false });
     }
 
     renderGame(game, index) {
@@ -45,7 +64,7 @@ export default class GameTableWithMoreInfo extends React.Component {
                     {game.OpponentName}
                 </th>
                 <th>
-                    <Button onClick={this.moreInfoStatPage()}>More Info</Button>
+                    <Button onClick={this.showOnClickStatModal(game.id)}>More Info</Button>
                 </th>
             </tr>
         )

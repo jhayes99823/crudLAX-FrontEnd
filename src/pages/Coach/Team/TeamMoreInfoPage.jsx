@@ -6,11 +6,10 @@ import AddPlayerToRoster from '../../../components/Team/AddPlayerToTeamModal.com
 import LabelPage from '../../../components/Label/label.component';
 import { withRouter } from 'react-router-dom';
 import PracticeTable from '../../../components/ActivitiyTable/practiceTable.component';
-import gameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
+import GameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 import CreateGameModal from '../../../components/Activity/CreateGameModal.component';
 import CreatePracticeModal from '../../../components/Activity/CreatePracticeModal.component';
 import StatTable from '../../../components/StatTable/StatTableForAverage.component';
-import GameTableWithMoreInfo from '../../../components/ActivitiyTable/gameTableWithMoreInfo.component';
 
 
 
@@ -151,7 +150,7 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <Container>
                     Teams Assigned Games
-                    <GameTableWithMoreInfo games={this.state.games}/>
+                    <GameTableWithMoreInfo tid games={this.state.games}/>
                     <Button onClick={this.showGameModal}>Create A Game</Button>
                     {/* create a new game table for stats 
                         add a new td with a button for more 
@@ -170,7 +169,7 @@ class TeamMoreInfoPage extends React.Component {
                 <br></br>
                 <Container>
                     Team Average Stats
-                <StatTable statprime={this.state.stats} />
+                    <StatTable statprime={this.state.stats} />
                 </Container>
                 <CreateGameModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showGameModal} onHide={this.closeGameModal} />
                 <CreatePracticeModal coachid={this.loggedUser.ID} tid={this.TID} show={this.state.showPracticeModal} onHide={this.closePracticeModal} />
