@@ -18,6 +18,7 @@ export default class CreateStatForm extends React.Component {
             passtotal: ''
 
         }
+        const trash = false;
 
         this.setValue = this.setValue.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -163,7 +164,7 @@ export default class CreateStatForm extends React.Component {
                                 Update Stat For Player
                             </Button>
 
-                            <Button variant="" type="">
+                            <Button onClick={this.deleteStat(loggedUser.ID)}>
                                 <FaTrash />
                             </Button>
 
