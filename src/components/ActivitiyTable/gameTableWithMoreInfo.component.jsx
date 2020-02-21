@@ -2,38 +2,18 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import logic from '../../util/logic';
 import { Button } from 'react-bootstrap';
-import {queryBuilder} from '../../util/query-builder.js';
-import StatGameTable from '../../../components/StatTable/StatTableForAverage.component';
+import { withRouter } from 'react-router-dom';
 
-
-
-export default class GameTableWithMoreInfo extends React.Component {
+class GameTableWithMoreInfo extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            stats: [],
-            showStatModal: false
-        }
-
-        this.showStatModal = this.showStatModal.bind(this)
-        this.showOnClickStatModal = this.showOnClickStatModal.bind(this)
-        this.closeStatModal = this.closeStatModal.bind(this)
 
         this.renderGame = this.renderGame.bind(this)
     }
 
-    showStatModal() {
-        this.setState({ showStatModal: true });
-    }
-
-    showOnClickStatModal() {
-        localStorage.setItem('GID', id)
-        this.setState({ showStatModal: true });
-    }
-    
-	closeStatModal() {
-		this.setState({ showStatModal: false });
+    moreInfoGamePage = GID => () => {
+        localStorage.setItem('moreGameInfo', GID);
+        this.props.history.push('/coach/game-info');
     }
 
     renderGame(game, index) {
@@ -64,7 +44,7 @@ export default class GameTableWithMoreInfo extends React.Component {
                     {game.OpponentName}
                 </th>
                 <th>
-                    <Button onClick={this.showOnClickStatModal(game.id)}>More Info</Button>
+                    <Button onClick={this.moreInfoGamePage(game.id)}>More Info</Button>
                 </th>
             </tr>
         )
@@ -101,6 +81,7 @@ export default class GameTableWithMoreInfo extends React.Component {
     }
 }
 
+export default withRouter(GameTableWithMoreInfo);
 
 // WEBPACK FOOTER //
 // src/components/ActivitiyTable/gameTable.component.jsx

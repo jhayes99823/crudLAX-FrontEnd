@@ -1,37 +1,41 @@
-
+import React from 'react';
+import { Modal } from 'react-bootstrap';
+import queryBuilder from '../../util/query-builder';
+import StatGameTable from '../StatTable/StatTableForGame.component';
 
 export default class ViewTeamModal extends React.Component {
     constructor(props) {
         super(props);
-        state = {
-            stats = []
+        this.GID = JSON.parse(localStorage.getItem('GID'));
+
+        this.state = {
+            stats: [],
+            statid: this.GID
         }
         this.TID = JSON.parse(localStorage.getItem('moreInfoTeam'));
-        this.GID = JSON.parse(localStorage.getItem('GID'));
+        localStorage.removeItem('GID');
+        this.fetchData = this.fetchData.bind(this);
     }
 
     componentDidMount() {
-        const statTeamReq = queryBuilder('/api/stat/viewTeamStatByGame', { TID: this.TID, GID: this.GID }, 'GET');
-        fetch(statTeamReq, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).then((res) => res.json())
-        .then((result) => {
-            console.log(result.statsteam);
-            if(result.success==true){
-                this.setState({
-                    stats: result.statsteam,
-                })
-            }
+        this.fetchData();
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            stats: []
         })
+    }
+
+    fetchData() {
+        
     }
 
 
     render() {
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.props.onHide} centered>
+                <Modal size="lg" show={this.props.show} onHide={this.props.onHide} centered>
                 <Modal.Header>
                     </Modal.Header>
                     <Modal.Body>
