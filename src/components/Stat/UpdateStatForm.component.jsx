@@ -18,7 +18,7 @@ export default class CreateStatForm extends React.Component {
 
         const newStat = {}
 
-        fetch('/api/stat/create-stat', {
+        fetch('/api/stat/update', {
             headers: {
                 'Content-Type': 'application/json'
             },
