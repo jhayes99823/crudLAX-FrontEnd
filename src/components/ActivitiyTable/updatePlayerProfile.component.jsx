@@ -4,7 +4,7 @@ export default class UpdatePlayerProfile extends React.Component {
   constructor(props) {
     super(props);
 
-    
+    //instantiate stuff 
     this.state = {
       UserName: '', 
       FirstName: '',
@@ -143,7 +143,7 @@ getSchoolYr(yr) {
                                     <option>Goalie</option>
                   </Form.Control> */}
               </Form.Group>
-            </Form.Row>
+            </Form.Row> 
 
 
 
