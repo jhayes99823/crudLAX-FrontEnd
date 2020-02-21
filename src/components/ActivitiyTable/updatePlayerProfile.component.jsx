@@ -17,6 +17,8 @@ export default class UpdatePlayerProfile extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.setValue = this.setValue.bind(this);
+    this.getPosition = this.getPosition.bind(this); 
+    this.getSchoolYr = this.getSchoolYr.bind(this); 
 
   }
 
@@ -32,8 +34,8 @@ export default class UpdatePlayerProfile extends React.Component {
           FirstName: playerProfile[0].Fname,
           LastName: playerProfile[0].Lname,
           Number: playerProfile[0].Number,
-          Position: playerProfile[0].Position,
-          SchoolYear: playerProfile[0].SchoolYear,
+          Position: this.getPosition(playerProfile[0].Position),
+          SchoolYear: this.getSchoolYr(playerProfile[0].SchoolYear),
           Playable: playerProfile[0].Playable
         })
   }
@@ -41,6 +43,37 @@ export default class UpdatePlayerProfile extends React.Component {
   }
 
 
+  getPosition(pos) {
+    switch(pos) {
+        case 'Attacker':
+            return 'A';
+            break;
+        case 'Midfield':
+            return 'M';
+        case 'Defender':
+            return 'D';
+            break;
+        case 'Goalie':
+            return 'G';
+            break;
+    }
+}
+
+getSchoolYr(yr) {
+    switch(yr) {
+        case 'Freshman':
+            return 0;
+            break;
+        case 'Sophomore':
+            return 1;
+        case 'Junior':
+            return 2;
+            break;
+        case 'Senior':
+            return 3;
+            break;
+    }
+} 
   setValue(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -48,12 +81,23 @@ export default class UpdatePlayerProfile extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     console.log('state b4 send', this.state);
+    const newPlayer = {
+        UserName: this.state.UserName,
+        FirstName: this.state.FirstName, 
+        LastName: this.state.LastName, 
+        //Position:  this.getPosition(this.state.Position), 
+        Number: this.state.Number, 
+        SchoolYear: this.getSchoolYr(this.state.SchoolYear), 
+        Playable: this.state.Playable
+    }
+    console.log("Before trying to update"); 
+    console.log(newPlayer); 
     fetch('/api/activity/player/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(newPlayer)
     }).then((Response) => Response.json())
       .then((result) => {
         console.log(result);
@@ -91,18 +135,27 @@ export default class UpdatePlayerProfile extends React.Component {
               </Form.Group>
 
               <Form.Group as={Col} controlId="formPosition">
-                <Form.Label>  Position</Form.Label>
-                <Form.Control name=" Position" defaultValue={this.state.Position} onChange={this.setValue} />
+                {/* <Form.Label>  Position</Form.Label> */}
+                {/* <Form.Control name=" Position" as= "select" defaultValue={this.state.Position} onChange={this.setValue} >
+                                    <option>Attacker</option>
+                                    <option>Midfield</option>
+                                    <option>Defender</option>
+                                    <option>Goalie</option>
+                  </Form.Control> */}
               </Form.Group>
             </Form.Row>
 
 
 
             <Form.Group as={Col} controlId="formSchoolYear">
-              <Form.Label>SchoolYear </Form.Label>
+             
 
-              <Form.Control defaultValue={this.state.SchoolYear} name="SchoolYear" type="number" onChange={this.setValue} min="8" />
-
+              {/* <Form.Control placeholder={this.state.SchoolYear} name="SchoolYear" as="select" onChange={this.setValue}>
+                                    <option>Freshman</option>
+                                    <option>Sophomore</option>
+                                    <option>Junior</option>
+                                    <option>Senior</option>
+                </Form.Control> */}
             </Form.Group>
 
 
