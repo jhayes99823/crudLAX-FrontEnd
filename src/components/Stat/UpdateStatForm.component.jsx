@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Form, Button, Col, Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
-export default class CreateStatForm extends React.Component {
+export default class UpdateStatForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -54,7 +54,7 @@ export default class CreateStatForm extends React.Component {
 
         console.log('stat: ', this.newStat)
 
-        fetch('/api/stat/create', {
+        fetch('/api/stat/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export default class CreateStatForm extends React.Component {
                 window.location.reload();
              }
              else {
-                 alert('stat was not created properly')
+                 alert('stat was not updated properly')
              }
         })
     }
@@ -177,7 +177,7 @@ export default class CreateStatForm extends React.Component {
                             </Form.Row>
         
                             <Button variant="primary" type="submit">
-                                Create Stat For Player
+                                Update Stat For Player
                             </Button>
                         </Form>
                     </Container>
